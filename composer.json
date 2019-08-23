@@ -1,0 +1,23 @@
+{
+    "name": "ipsum3/article",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "B1nj",
+            "email": "postmaster@b1nj.fr"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Ipsum\\Article\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ipsum\\Article\\ArticleServiceProvider"
+            ]
+        }
+    }
+}
