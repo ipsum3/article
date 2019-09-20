@@ -3,13 +3,15 @@
 namespace Ipsum\Article\app\Models;
 
 
-use Ipsum\Article\Concerns\Order;
+use Ipsum\Article\Concerns\Sortable;
 use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Core\Concerns\Slug;
 
 class Categorie extends BaseModel
 {
-    use Slug, Order;
+    use Slug, Sortable;
+
+    // TODO check champs html
 
     protected $table = 'article_categories';
 

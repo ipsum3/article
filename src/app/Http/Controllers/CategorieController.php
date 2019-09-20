@@ -81,7 +81,7 @@ class CategorieController extends AdminController
         $categorie->save();
         $categorie_suivante->save();
 
-        Alert::success("L'order a bien été changé")->flash();
+        Alert::success("L'ordre a bien été changé")->flash();
         return back();
     }
 }

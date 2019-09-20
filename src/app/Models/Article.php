@@ -5,14 +5,17 @@ namespace Ipsum\Article\app\Models;
 
 use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Core\Concerns\Slug;
+use Ipsum\Media\Concerns\Mediable;
 
 class Article extends BaseModel
 {
-    use Slug;
+    use Slug, Mediable;
+
+    // TODO check champs html
 
     protected $table = 'articles';
 
-    protected $fillable = ['titre', 'extrait', 'texte', 'seo_title', 'seo_description', 'type', 'categorie_id', 'etat', 'slug'];
+    protected $fillable = ['slug', 'type', 'etat', 'categorie_id', 'titre', 'extrait', 'texte', 'date', 'seo_title', 'seo_description'];
 
     protected $slugBase = 'titre';
     
@@ -21,6 +24,12 @@ class Article extends BaseModel
     const TYPE_PAGE = 'page';
     const TYPE_POST = 'post';
 
+    static public $etats = ['publie' => 'Publié', 'brouillon' => 'Brouillon'];
+    const ETAT_PUBLIE = 'publie';
+
+    protected $dates = [
+        'date',
+    ];
 
 
     /*
@@ -46,6 +55,11 @@ class Article extends BaseModel
     {
         return $query->where('type', self::TYPE_PAGE);
     }
+
+    public function scopePublie($query)
+    {
+        return $query->where('etat', self::ETAT_PUBLIE);
+    }
     
     
     
@@ -68,13 +82,23 @@ class Article extends BaseModel
         return isset($this->types[$this->type]) ? $this->types[$this->type] : null;
     }
     
-    public function isPost()
+    public function getIsPostAttribute()
     {
         return $this->type == self::TYPE_POST;
     }
     
-    public function isPage()
+    public function getIsPageAttribute()
     {
         return $this->type == self::TYPE_PAGE;
-    }    
+    }
+
+    public function getIsPublieAttribute()
+    {
+        return $this->etat == self::ETAT_PUBLIE;
+    }
+
+    public function getEtatToStringAttribute()
+    {
+        return isset(self::$etats[$this->etat]) ? self::$etats[$this->etat] : null;
+    }
 }

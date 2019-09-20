@@ -14,7 +14,7 @@ class ArticleController extends AdminController
 
     public function index(Request $request, $type)
     {
-        $query = Article::with('categorie')->where('type', $type);
+        $query = Article::with('categorie', 'illustration')->where('type', $type);
 
         if ($request->has('categorie_id')) {
             $query->where('categorie_id', $request->get('categorie_id'));

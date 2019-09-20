@@ -9,57 +9,78 @@
         {{ Aire::hidden('type', $type) }}
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">{{ $article->exists ? 'Modification' : 'Ajout' }}</h3>
+                <h2 class="box-title">{{ $article->exists ? 'Modification' : 'Ajout' }}</h2>
             </div>
             <div class="box-body">
                 {{ Aire::input('titre', 'Titre*') }}
                 @if ($type != \Ipsum\Article\app\Models\Article::TYPE_PAGE)
+                {{-- TODO select recursif --}}
                 {{ Aire::select(collect(['' => '---- Catégorie -----'])->union($categories), 'categorie_id', 'Catégorie') }}
                 @endif
-                {{ Aire::textArea('extrait', 'Extrait') }}
+                {{ Aire::textArea('extrait', 'Extrait')->class('tinymce-simple') }}
 
-                <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-                <script>
-                    tinymce.init({
-                        selector: '.tinymce',
-                        plugins: "code paste autolink fullscreen link lists media image ",
-                        toolbar: "bold italic bullist numlist removeformat | formatselect | link image media | code fullscreen",
-                        menubar: "",
-                        paste_as_text: true,
-                        height: 500,
-                        branding: false,
-                        target_list: false,
-                        image_class_list: [
-                            {title: 'None', value: ''},
-                            {title: 'Left', value: 'text-left'},
-                            {title: 'Center', value: 'text-center'}
-                        ],
-                        image_dimensions: false,
-                        object_resizing : false,
-                        formats: {
-                            headline: { block: 'div', classes: 'headline' },
-                            highlight: { block: 'div', classes: 'highlight' },
-                        },
+                {{ Aire::textArea('texte', 'Texte')->class('tinymce')->data('medias', route('admin.media.popin')) }}
 
-                        block_formats: 'Paragraph=p; Heading 2=h2; Heading 3=h3; Heading 4=h4; Chapeau=headline; Mise en avant=highlight;',
-
-                        language: '{{ app()->getLocale() }}', {{-- TODO --}}
-
-                        fix_list_elements : true
-
-                    });
-                </script>
-                <textarea name="texte" class="tinymce">{{ request()->old('texte', $article->exists ? $article->texte : '') }}</textarea>
+                <script src="{{ asset('ipsum/admin/dist/tinymce.js') }}"></script>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-header">
+                <h2 class="box-title">
+                    Publication
+                    @if ($article->exists)
+                    <small class="text-muted">Créé le <span data-toggle="tooltip"  title="{{ $article->created_at }}">{{ $article->created_at->format('d/m/Y')  }}</span> et modifié le <span data-toggle="tooltip"  title="{{ $article->updated_at }}">{{ $article->updated_at->format('d/m/Y')  }}</span></small>
+                    @endif
+                </h2>
+            </div>
+            <div class="box-body row">
+                <div class="col">
+                    {{ Aire::date('date', 'Date') }}
+                </div>
+                <div class="col">
+                    {{ Aire::select(\Ipsum\Article\app\Models\Article::$etats, 'etat', 'Etat') }}
+                </div>
             </div>
             <div class="box-footer">
                 <div><button class="btn btn-outline-secondary" type="reset">Annuler</button></div>
                 <div><button class="btn btn-primary" type="submit">Enregistrer</button></div>
             </div>
         </div>
+        <div class="box">
+            <div class="box-header">
+                <h2 class="box-title">Médias</h2>
+            </div>
+            <div class="box-body">
+                <div class="upload"
+                     data-uploadendpoint="{{ route('admin.media.store') }}"
+                     data-uploadmedias="{{ route('admin.media.publication', [urlencode(\Ipsum\Article\app\Models\Article::class), 'publication_id' => $article->exists ? $article->id : '']) }}"
+                     data-uploadrepertoire="article"
+                     data-uploadpublicationid="{{ $article->id }}"
+                     data-uploadpublicationtype="{{ \Ipsum\Article\app\Models\Article::class }}"
+                     data-uploadgroupe=""
+                     data-uploadnote="Images et documents, poids maximum {{ config('ipsum.media.upload_max_filesize') }} Ko"
+                     data-uploadmaxfilesize="{{ config('ipsum.media.upload_max_filesize') }}"
+                     data-uploadmmaxnumberoffiles=""
+                     data-uploadminnumberoffiles=""
+                     data-uploadallowedfiletypes=""
+                     data-uploadcsrftoken="{{ csrf_token() }}">
+                    <div class="upload-DragDrop"></div>
+                    <div class="upload-ProgressBar"></div>
+                    <div class="upload-alerts mt-3"></div>
+                    <div class="mt-3">
+                        <h3>Médias associés :</h3>
+                        <div class="d-flex flex-row flex-wrap sortable upload-files" data-sortableurl="{{ route('admin.media.changeOrder', [urlencode(\Ipsum\Article\app\Models\Article::class), $article->exists ? $article->id : 0]) }}" data-sortablecsrftoken="{{ csrf_token() }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <link href="{{ asset('ipsum/admin/dist/uppy.css') }}" rel="stylesheet">
+            <script src="{{ asset('ipsum/admin/dist/uppy.js') }}"></script>
+        </div>
         @if(auth()->user()->isSuperAdmin())
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Seo</h3>
+                    <h2 class="box-title">Seo</h2>
                 </div>
                 <div class="box-body">
                     {{ Aire::input('seo_title', 'Balise title') }}

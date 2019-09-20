@@ -2,7 +2,7 @@
 
 namespace Ipsum\Article\Concerns;
 
-trait Order
+trait Sortable
 {
 
     protected static function bootOrder()

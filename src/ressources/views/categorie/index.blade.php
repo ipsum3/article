@@ -68,7 +68,7 @@
                                 <form action="{{ route('admin.articleCategorie.destroy', $child) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a class="btn btn-primary" href="{{ route('admin.articleCategorie.edit', $child->id) }}"><i class="fa fa-pen"></i> Edit</a>
+                                    <a class="btn btn-primary" href="{{ route('admin.articleCategorie.edit', $child->id) }}"><i class="fa fa-edit"></i> Edit</a>
                                     <button type="submit" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Delete</button>
                                 </form>
                             </td>

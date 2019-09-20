@@ -14,7 +14,8 @@
                 {{ Aire::input('nom', 'Nom*') }}
                 {{-- TODO select recursif --}}
                 {{ Aire::select(collect(['' => '---- Base -----'])->union($categories), 'parent_id', 'Catégorie parente') }}
-                {{ Aire::textArea('description', 'Description') }}
+                {{ Aire::textArea('description', 'Description')->class('tinymce-simple') }}
+                <script src="{{ asset('ipsum/admin/dist/tinymce.js') }}"></script>
             </div>
             <div class="box-footer">
                 <div><button class="btn btn-outline-secondary" type="reset">Annuler</button></div>

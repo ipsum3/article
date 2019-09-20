@@ -26,11 +26,14 @@ class StoreArticle extends FormRequest
     public function rules()
     {
         $types =  array_keys(Article::$types);
+        $etats =  array_keys(Article::$etats);
 
         return [
             "categorie_id" => "nullable|integer|exists:article_categories,id",
             'titre' => 'required|max:255',
-            'type' => 'in:'.implode(',', $types)
+            'type' => 'in:'.implode(',', $types),
+            'etat' => 'in:'.implode(',', $etats),
+            'date' => 'date'
         ];
     }
 

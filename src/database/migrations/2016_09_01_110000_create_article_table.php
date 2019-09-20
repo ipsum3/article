@@ -17,12 +17,13 @@ class CreateArticleTable extends Migration
             $table->increments('id');
             $table->string('slug')->unique();
             $table->string('type', 20)->nullable();
-            $table->tinyInteger('etat')->unsigned()->default(0);
+            $table->string('etat')->default('publie');
             $table->integer('categorie_id')->nullable()->unsigned()->index();
             $table->integer('media_id')->nullable();
             $table->string('titre');
             $table->text('extrait')->nullable();
             $table->text('texte')->nullable();
+            $table->dateTime('date')->nullable();
             $table->string('seo_title')->nullable();
             $table->text('seo_description')->nullable();
             $table->nullableTimestamps();
