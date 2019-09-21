@@ -10,10 +10,9 @@ use Ipsum\Article\app\Policies\ArticlePolicy;
 class ArticleServiceProvider extends ServiceProvider
 {
 
-    /*protected $commands = [
-        \Ipsum\Admin\app\Console\Commands\Install::class,
-        \Ipsum\Admin\app\Console\Commands\CreateUser::class,
-    ];*/
+    protected $commands = [
+        \Ipsum\Article\app\Console\Commands\Install::class,
+    ];
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -89,6 +88,6 @@ class ArticleServiceProvider extends ServiceProvider
         );*/
 
         // register the artisan commands
-        //$this->commands($this->commands);
+        $this->commands($this->commands);
     }
 }
