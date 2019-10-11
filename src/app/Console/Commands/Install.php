@@ -46,7 +46,7 @@ class Install extends Command
         $this->progressBar->advance();
 
         $this->line(' Publishing configs, langs, views and Ipsum Assets files');
-        $this->executeProcess('php artisan vendor:publish --provider="Ipsum\Article\AdminServiceProvider" --tag=install');
+        $this->executeProcess('php artisan vendor:publish --provider="Ipsum\Article\ArticleServiceProvider" --tag=install');
 
         $this->line(" Generating users table (using Laravel's default migrations)");
         $this->executeProcess('php artisan migrate');
