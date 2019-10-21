@@ -12,7 +12,6 @@
             </div>
             <div class="box-body">
                 {{ Aire::input('nom', 'Nom*') }}
-                {{-- TODO select recursif --}}
                 {{ Aire::select(collect(['' => '---- Base -----'])->union($categories), 'parent_id', 'Catégorie parente') }}
                 {{ Aire::textArea('description', 'Description')->class('tinymce-simple') }}
                 <script src="{{ asset('ipsum/admin/dist/tinymce.js') }}"></script>

@@ -23,14 +23,22 @@
                 {{ Aire::input('search')->id('search')->class('form-control mb-2 mr-sm-2')->value(request()->get('search'))->placeholder('Recherche')->withoutGroup() }}
 
                 @if ($type != \Ipsum\Article\app\Models\Article::TYPE_PAGE)
-                <label class="sr-only" for="categorie_id">Catégorie</label>
-                {{-- TODO select recursif --}}
-                {{ Aire::select(collect(['' => '---- Catégorie -----'])->union($categories), 'categorie_id')->value(request()->get('categorie_id'))->id('categorie_id')->class('form-control mb-2 mr-sm-2')->withoutGroup() }}
+                    <label class="sr-only" for="categorie_id">Catégorie</label>
+                    <select id="categorie_id" name="categorie_id" class="form-control mb-2 mr-sm-2" style="max-width: 300px;">
+                        <option value="">---- Catégories -----</option>
+                        @foreach($categories as $categorie)
+                            <option value="{{ $categorie->id }}" {{ $categorie->id == request()->get('categorie_id') ? 'selected' : '' }}>{{ $categorie->nom }}</option>
+                            @foreach($categorie->children as $sous_categorie)
+                                <option value="{{ $sous_categorie->id }}" {{ $sous_categorie->id == request()->get('categorie_id') ? 'selected' : '' }}>-- {{ $sous_categorie->nom }}</option>
+                            @endforeach
+                        @endforeach
+                    </select>
                 @endif
 
                 <button type="submit" class="btn btn-outline-secondary mb-2">Rechercher</button>
             {{ Aire::close() }}
 
+            {{-- TODO tri des colonnes --}}
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
@@ -43,7 +51,7 @@
                         <th>Catégorie</th>
                         @endif
                         <th>Illustration</th>
-                        <th width="180px">Actions</th>
+                        <th width="240px">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,9 +74,9 @@
                             <form action="{{ route('admin.article.destroy', $article->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a class="btn btn-primary" href="{{ route('admin.article.edit', [$type, $article->id]) }}"><i class="fa fa-edit"></i> Edit</a>
+                                <a class="btn btn-primary" href="{{ route('admin.article.edit', [$type, $article->id]) }}"><i class="fa fa-edit"></i> Modifier</a>
                                 @if ($article->type != \Ipsum\Article\app\Models\Article::TYPE_PAGE)
-                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Delete</button>
+                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Supprimer</button>
                                 @endif
                             </form>
                         </td>

@@ -25,7 +25,7 @@
                         <th>Nom</th>
                         <th>Description</th>
                         <th>Ordre</th>
-                        <th width="180px">Actions</th>
+                        <th width="240px">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,7 +33,7 @@
                     <tr class="bg-secondary text-white">
                         <td>{{ $categorie->id }}</td>
                         <td>{{ $categorie->nom }}</td>
-                        <td>{{ $categorie->description }}</td>
+                        <td>{{ Str::limit(strip_tags($categorie->description)) }}</td>
                         <td>
                             @if($categorie_key < $categories->count() - 1)
                                 <a href="{{ route('admin.articleCategorie.changeOrder', [$categorie, 'down']) }}" class="text-white"><span class="fa fa-arrow-down"></span></a>
@@ -46,8 +46,8 @@
                             <form action="{{ route('admin.articleCategorie.destroy', $categorie) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a class="btn btn-primary" href="{{ route('admin.articleCategorie.edit', $categorie->id) }}"><i class="fa fa-pen"></i> Edit</a>
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Delete</button>
+                                <a class="btn btn-primary" href="{{ route('admin.articleCategorie.edit', $categorie->id) }}"><i class="fa fa-edit"></i> Modifier</a>
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Supprimer</button>
                             </form>
                         </td>
                     </tr>
@@ -55,7 +55,7 @@
                         <tr>
                             <td>{{ $child->id }}</td>
                             <td>---- {{ $child->nom }}</td>
-                            <td>{{ $child->description }}</td>
+                            <td>{{ Str::limit(strip_tags($child->description)) }}</td>
                             <td>
                                 @if($child_key < $categorie->children->count() - 1)
                                     <a href="{{ route('admin.articleCategorie.changeOrder', [$child, 'down']) }}" ><span class="fa fa-arrow-down"></span></a>
@@ -68,8 +68,8 @@
                                 <form action="{{ route('admin.articleCategorie.destroy', $child) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a class="btn btn-primary" href="{{ route('admin.articleCategorie.edit', $child->id) }}"><i class="fa fa-edit"></i> Edit</a>
-                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Delete</button>
+                                    <a class="btn btn-primary" href="{{ route('admin.articleCategorie.edit', $child->id) }}"><i class="fa fa-edit"></i> Modifier</a>
+                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Supprimer</button>
                                 </form>
                             </td>
                         </tr>

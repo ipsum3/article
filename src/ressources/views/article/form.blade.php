@@ -13,10 +13,25 @@
             </div>
             <div class="box-body">
                 {{ Aire::input('titre', 'Titre*') }}
+
                 @if ($type != \Ipsum\Article\app\Models\Article::TYPE_PAGE)
-                {{-- TODO select recursif --}}
-                {{ Aire::select(collect(['' => '---- Catégorie -----'])->union($categories), 'categorie_id', 'Catégorie') }}
+                    <div class="form-group">
+                        <label for="categorie_id">Catégorie*</label>
+                        <select id="categorie_id" name="categorie_id" class="form-control @error('categorie_id') is-invalid @enderror">
+                            <option value="">---- Catégories -----</option>
+                            @foreach($categories as $categorie)
+                                <option value="{{ $categorie->id }}" {{ ($article->exists and $categorie->id == request()->old('categorie_id', $article->categorie_id)) ? 'selected' : '' }}>{{ $categorie->nom }}</option>
+                                @foreach($categorie->children as $sous_categorie)
+                                    <option value="{{ $sous_categorie->id }}" {{ ($article->exists and $sous_categorie->id == request()->old('categorie_id', $article->categorie_id)) ? 'selected' : '' }}>-- {{ $sous_categorie->nom }}</option>
+                                @endforeach
+                            @endforeach
+                        </select>
+                        @error('categorie_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 @endif
+
                 {{ Aire::textArea('extrait', 'Extrait')->class('tinymce-simple') }}
 
                 {{ Aire::textArea('texte', 'Texte')->class('tinymce')->data('medias', route('admin.media.popin')) }}

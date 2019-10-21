@@ -16,10 +16,10 @@ class ArticleController extends AdminController
     {
         $query = Article::with('categorie', 'illustration')->where('type', $type);
 
-        if ($request->has('categorie_id')) {
+        if ($request->filled('categorie_id')) {
             $query->where('categorie_id', $request->get('categorie_id'));
         }
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $query->where(function($query) use ($request) {
                 foreach (['titre', 'extrait', 'texte'] as $colonne) {
                     $query->orWhere($colonne, 'like', '%'.$request->get('search').'%');
@@ -28,7 +28,7 @@ class ArticleController extends AdminController
         }
         $articles = $query->latest()->paginate();
 
-        $categories = Categorie::root()->with('children')->orderBy('order')->get()->pluck('nom', 'id');
+        $categories = Categorie::root()->with('children')->orderBy('order')->get();
 
         return view('IpsumArticle::article.index', compact('articles', 'type', 'categories'));
     }
@@ -37,7 +37,7 @@ class ArticleController extends AdminController
     {
         $article = new Article;
 
-        $categories = Categorie::root()->with('children')->orderBy('order')->get()->pluck('nom', 'id');
+        $categories = Categorie::root()->with('children')->orderBy('order')->get();
 
         return view('IpsumArticle::article.form', compact('article', 'type', 'categories'));
     }
@@ -51,7 +51,7 @@ class ArticleController extends AdminController
 
     public function edit($type, Article $article)
     {
-        $categories = Categorie::root()->with('children')->orderBy('order')->get()->pluck('nom', 'id');
+        $categories = Categorie::root()->with('children')->orderBy('order')->get();
 
         return view('IpsumArticle::article.form', compact('article', 'type', 'categories'));
     }
