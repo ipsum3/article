@@ -31,9 +31,9 @@ class StoreArticle extends FormRequest
         return [
             "categorie_id" => "nullable|integer|exists:article_categories,id",
             'titre' => 'required|max:255',
-            'type' => 'in:'.implode(',', $types),
-            'etat' => 'in:'.implode(',', $etats),
-            'date' => 'date'
+            'type' => 'required|in:'.implode(',', $types),
+            'etat' => 'required|in:'.implode(',', $etats),
+            'date' => 'nullable|date'
         ];
     }
 

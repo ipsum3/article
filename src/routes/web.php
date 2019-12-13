@@ -24,6 +24,10 @@ Route::group(
             "as" => "admin.articleCategorie.destroy",
             "uses" => "CategorieController@destroy",
         ));
+        Route::get("categorie/{categorie}/delete", array(
+            "as" => "admin.articleCategorie.delete",
+            "uses" => "CategorieController@destroy",
+        ));
         Route::put("categorie/{categorie}", array(
             "as" => "admin.articleCategorie.update",
             "uses" => "CategorieController@update",
@@ -52,6 +56,10 @@ Route::group(
         ));
         Route::delete("{article}", array(
             "as" => "admin.article.destroy",
+            "uses" => "ArticleController@destroy",
+        ));
+        Route::get("{article}/delete", array(
+            "as" => "admin.article.delete",
             "uses" => "ArticleController@destroy",
         ));
         Route::put("{type}/{article}", array(

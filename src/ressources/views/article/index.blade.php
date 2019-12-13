@@ -6,14 +6,12 @@
     <h1 class="main-title">Articles</h1>
     <div class="box">
         <div class="box-header">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
-                <h2 class="box-title">Liste ({{ $articles->total() }})</h2>
-                <div class="btn-toolbar">
-                    <a class="btn btn-primary" href="{{ route('admin.article.create', $type) }}">
-                        <i class="fas fa-plus"></i>
-                        Ajouter
-                    </a>
-                </div>
+            <h2 class="box-title">Liste ({{ $articles->total() }})</h2>
+            <div class="btn-toolbar">
+                <a class="btn btn-outline-secondary" href="{{ route('admin.article.create', $type) }}">
+                    <i class="fas fa-plus"></i>
+                    Ajouter
+                </a>
             </div>
         </div>
         <div class="box-body">
@@ -38,20 +36,19 @@
                 <button type="submit" class="btn btn-outline-secondary mb-2">Rechercher</button>
             {{ Aire::close() }}
 
-            {{-- TODO tri des colonnes --}}
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Etat</th>
-                        <th>Date</th>
-                        <th>Titre</th>
+                        <th>@include('IpsumAdmin::partials.tri', ['label' => '#', 'champ' => 'id'])</th>
+                        <th>@include('IpsumAdmin::partials.tri', ['label' => 'État', 'champ' => 'etat'])</th>
+                        <th>@include('IpsumAdmin::partials.tri', ['label' => 'Date', 'champ' => 'created_at'])</th>
+                        <th>@include('IpsumAdmin::partials.tri', ['label' => 'Titre', 'champ' => 'titre'])</th>
                         <th>Extrait</th>
                         @if ($type != \Ipsum\Article\app\Models\Article::TYPE_PAGE)
                         <th>Catégorie</th>
                         @endif
                         <th>Illustration</th>
-                        <th width="240px">Actions</th>
+                        <th width="160px">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,8 +57,8 @@
                         <td>{{ $article->id }}</td>
                         <td>{{ $article->etatToString }}</td>
                         <td>{{ $article->created_at->format('d/m/Y') }}</td>
-                        <td>{{ $article->titre }}</td>
-                        <td>{{ Str::limit($article->extrait) }}</td>
+                        <td>{{ $article->nom }}</td>
+                        <td>{{ Str::limit(strip_tags($article->extrait)) }}</td>
                         @if ($type != \Ipsum\Article\app\Models\Article::TYPE_PAGE)
                         <td>{{ $article->categorie ? $article->categorie->nom : '' }}</td>
                         @endif
@@ -71,12 +68,12 @@
                             @endif
                         </td>
                         <td class="text-right">
-                            <form action="{{ route('admin.article.destroy', $article->id) }}" method="POST">
+                            <form action="{{ route('admin.article.destroy', $article) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a class="btn btn-primary" href="{{ route('admin.article.edit', [$type, $article->id]) }}"><i class="fa fa-edit"></i> Modifier</a>
-                                @if ($article->type != \Ipsum\Article\app\Models\Article::TYPE_PAGE)
-                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Supprimer</button>
+                                <a class="btn btn-primary" href="{{ route('admin.article.edit', [$type, $article]) }}"><i class="fa fa-edit"></i> Modifier</a>
+                                @if ($article->is_deletable)
+                                    <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash-alt"></i></button>
                                 @endif
                             </form>
                         </td>

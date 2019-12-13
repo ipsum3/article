@@ -26,6 +26,9 @@ class ArticleController extends AdminController
                 }
             });
         }
+        if ($request->filled('tri')) {
+            $query->orderBy($request->tri, $request->order);
+        }
         $articles = $query->latest()->paginate();
 
         $categories = Categorie::root()->with('children')->orderBy('order')->get();
@@ -66,10 +69,15 @@ class ArticleController extends AdminController
 
     public function destroy(Article $article)
     {
+        if (!$article->is_deletable) {
+            return abort(403);
+        }
+
+        $type = $article->type;
         $article->delete();
 
         Alert::warning("L'enregistrement a bien été supprimé")->flash();
-        return back();
+        return redirect()->route('admin.article.index', $type);
 
     }
 }

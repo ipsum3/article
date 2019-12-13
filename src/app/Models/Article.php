@@ -101,4 +101,14 @@ class Article extends BaseModel
     {
         return isset(self::$etats[$this->etat]) ? self::$etats[$this->etat] : null;
     }
+
+    public function getNomAttribute()
+    {
+        return $this->attributes['nom'] === null ? $this->titre : $this->attributes['nom'];
+    }
+
+    public function getIsDeletableAttribute()
+    {
+        return $this->attributes['nom'] === null;
+    }
 }

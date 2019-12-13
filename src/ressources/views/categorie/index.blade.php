@@ -9,7 +9,7 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
                 <h2 class="box-title">Liste ({{ $categories->count() }})</h2>
                 <div class="btn-toolbar">
-                    <a class="btn btn-primary" href="{{ route('admin.articleCategorie.create') }}">
+                    <a class="btn btn-outline-secondary" href="{{ route('admin.articleCategorie.create') }}">
                         <i class="fas fa-plus"></i>
                         Ajouter
                     </a>
@@ -25,7 +25,7 @@
                         <th>Nom</th>
                         <th>Description</th>
                         <th>Ordre</th>
-                        <th width="240px">Actions</th>
+                        <th width="160px">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,8 +46,8 @@
                             <form action="{{ route('admin.articleCategorie.destroy', $categorie) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a class="btn btn-primary" href="{{ route('admin.articleCategorie.edit', $categorie->id) }}"><i class="fa fa-edit"></i> Modifier</a>
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Supprimer</button>
+                                <a class="btn btn-primary" href="{{ route('admin.articleCategorie.edit', $categorie) }}"><i class="fa fa-edit"></i> Modifier</a>
+                                <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash-alt"></i></button>
                             </form>
                         </td>
                     </tr>
@@ -68,8 +68,8 @@
                                 <form action="{{ route('admin.articleCategorie.destroy', $child) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a class="btn btn-primary" href="{{ route('admin.articleCategorie.edit', $child->id) }}"><i class="fa fa-edit"></i> Modifier</a>
-                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Supprimer</button>
+                                    <a class="btn btn-primary" href="{{ route('admin.articleCategorie.edit', $child) }}"><i class="fa fa-edit"></i> Modifier</a>
+                                    <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash-alt"></i></button>
                                 </form>
                             </td>
                         </tr>

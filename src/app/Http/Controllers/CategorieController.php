@@ -63,7 +63,7 @@ class CategorieController extends AdminController
         $categorie->delete();
 
         Alert::warning("L'enregistrement a bien été supprimé")->flash();
-        return back();
+        return redirect()->route('admin.articleCategorie.index');
 
     }
 
@@ -73,13 +73,13 @@ class CategorieController extends AdminController
         $categorie_suivante = Categorie::where('parent_id', $categorie->parent_id)->where('order', $categorie->order + ($direction == 'up' ? -1 : +1))->first();
         if(!$categorie_suivante) {
             Categorie::updateOrder($categorie->parent_id); // En cas d'erreur on retrie les categories
-            return back();
-        }
-        $categorie->order = $categorie_suivante->order;
-        $categorie_suivante->order = $categorie->getOriginal('order');
+        } else {
+            $categorie->order = $categorie_suivante->order;
+            $categorie_suivante->order = $categorie->getOriginal('order');
 
-        $categorie->save();
-        $categorie_suivante->save();
+            $categorie->save();
+            $categorie_suivante->save();
+        }
 
         Alert::success("L'ordre a bien été changé")->flash();
         return back();

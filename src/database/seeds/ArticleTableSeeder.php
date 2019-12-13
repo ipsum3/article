@@ -29,26 +29,31 @@ class ArticleTableSeeder extends Seeder
             array(
                 'slug' => '',
                 'titre' => 'Accueil',
+                'nom' => 'Accueil',
                 'type' => Article::TYPE_PAGE,
             ),
             array(
                 'slug' => 'page1',
                 'titre' => 'Page 1',
+                'nom' => 'Page 1',
                 'type' => Article::TYPE_PAGE,
             ),
             array(
                 'slug' => 'page2',
                 'titre' => 'Page 2',
+                'nom' => 'Page 2',
                 'type' => Article::TYPE_PAGE,
             ),
             array(
                 'slug' => 'contact',
                 'titre' => 'Contact',
+                'nom' => 'Contact',
                 'type' => Article::TYPE_PAGE,
             ),
             array(
                 'slug' => 'mentions-legales',
                 'titre' => 'Mentions légales',
+                'nom' => 'Mentions légales',
                 'type' => Article::TYPE_PAGE,
             ),
         );
