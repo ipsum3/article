@@ -9,7 +9,7 @@ return [
         ],
         'post' => [
             'nom' => 'Post',
-            'has_categorie' => false
+            'has_categorie' => true
         ],
     ],
 
@@ -17,7 +17,5 @@ return [
         'publie' => 'Publié',
         'brouillon' => 'Brouillon'
     ],
-
-    'has_categorie' => true,
 
 ];
