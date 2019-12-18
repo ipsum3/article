@@ -25,8 +25,8 @@ class StoreArticle extends FormRequest
      */
     public function rules()
     {
-        $types =  array_keys(Article::$types);
-        $etats =  array_keys(Article::$etats);
+        $types =  array_keys(config('ipsum.article.types'));
+        $etats =  array_keys(config('ipsum.article.etats'));
 
         return [
             "categorie_id" => "nullable|integer|exists:article_categories,id",

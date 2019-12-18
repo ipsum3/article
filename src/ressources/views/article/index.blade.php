@@ -20,7 +20,7 @@
                 <label class="sr-only" for="search">Recherche</label>
                 {{ Aire::input('search')->id('search')->class('form-control mb-2 mr-sm-2')->value(request()->get('search'))->placeholder('Recherche')->withoutGroup() }}
 
-                @if ($type != \Ipsum\Article\app\Models\Article::TYPE_PAGE)
+                @if (config('ipsum.article.types.'.$type.'.has_categorie'))
                     <label class="sr-only" for="categorie_id">Catégorie</label>
                     <select id="categorie_id" name="categorie_id" class="form-control mb-2 mr-sm-2" style="max-width: 300px;">
                         <option value="">---- Catégories -----</option>
@@ -44,7 +44,7 @@
                         <th>@include('IpsumAdmin::partials.tri', ['label' => 'Date', 'champ' => 'created_at'])</th>
                         <th>@include('IpsumAdmin::partials.tri', ['label' => 'Titre', 'champ' => 'titre'])</th>
                         <th>Extrait</th>
-                        @if ($type != \Ipsum\Article\app\Models\Article::TYPE_PAGE)
+                        @if (config('ipsum.article.types.'.$type.'.has_categorie'))
                         <th>Catégorie</th>
                         @endif
                         <th>Illustration</th>
@@ -59,7 +59,7 @@
                         <td>{{ $article->created_at->format('d/m/Y') }}</td>
                         <td>{{ $article->nom }}</td>
                         <td>{{ Str::limit(strip_tags($article->extrait)) }}</td>
-                        @if ($type != \Ipsum\Article\app\Models\Article::TYPE_PAGE)
+                        @if (config('ipsum.article.types.'.$type.'.has_categorie'))
                         <td>{{ $article->categorie ? $article->categorie->nom : '' }}</td>
                         @endif
                         <td>

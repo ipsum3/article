@@ -20,11 +20,9 @@ class Article extends BaseModel
     protected $slugBase = 'titre';
     
     
-    static public $types = ['page' => 'Pages', 'post' => 'Post'];
     const TYPE_PAGE = 'page';
     const TYPE_POST = 'post';
 
-    static public $etats = ['publie' => 'Publié', 'brouillon' => 'Brouillon'];
     const ETAT_PUBLIE = 'publie';
 
     protected $dates = [
@@ -99,7 +97,7 @@ class Article extends BaseModel
 
     public function getEtatToStringAttribute()
     {
-        return isset(self::$etats[$this->etat]) ? self::$etats[$this->etat] : null;
+        return isset(config('ipsum.article.etats')[$this->etat]) ? config('ipsum.article.etats')[$this->etat] : null;
     }
 
     public function getNomAttribute()

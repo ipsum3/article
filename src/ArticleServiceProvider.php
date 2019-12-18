@@ -83,9 +83,9 @@ class ArticleServiceProvider extends ServiceProvider
     public function register()
     {
 
-        /*$this->mergeConfigFrom(
+        $this->mergeConfigFrom(
             __DIR__.'/config/ipsum/article.php', 'ipsum.article'
-        );*/
+        );
 
         // register the artisan commands
         $this->commands($this->commands);

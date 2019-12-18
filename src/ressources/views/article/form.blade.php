@@ -28,7 +28,7 @@
             <div class="box-body">
                 {{ Aire::input('titre', 'Titre*') }}
 
-                @if ($type != \Ipsum\Article\app\Models\Article::TYPE_PAGE)
+                @if (config('ipsum.article.types.'.$type.'.has_categorie'))
                     <div class="form-group">
                         <label for="categorie_id">Catégorie*</label>
                         <select id="categorie_id" name="categorie_id" class="form-control @error('categorie_id') is-invalid @enderror">
@@ -67,7 +67,7 @@
                     {{ Aire::date('date', 'Date') }}
                 </div>
                 <div class="col">
-                    {{ Aire::select(\Ipsum\Article\app\Models\Article::$etats, 'etat', 'Etat') }}
+                    {{ Aire::select(config('ipsum.article.etats'), 'etat', 'Etat') }}
                 </div>
             </div>
         </div>
