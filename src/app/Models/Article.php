@@ -3,21 +3,22 @@
 namespace Ipsum\Article\app\Models;
 
 
+use Ipsum\Admin\Concerns\Htmlable;
 use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Core\Concerns\Slug;
 use Ipsum\Media\Concerns\Mediable;
 
 class Article extends BaseModel
 {
-    use Slug, Mediable;
-
-    // TODO check champs html
+    use Slug, Mediable, Htmlable;
 
     protected $table = 'articles';
 
     protected $fillable = ['slug', 'type', 'etat', 'categorie_id', 'titre', 'extrait', 'texte', 'date', 'seo_title', 'seo_description'];
 
     protected $slugBase = 'titre';
+
+    protected $htmlable = ['extrait', 'texte'];
     
     
     const TYPE_PAGE = 'page';

@@ -9,15 +9,15 @@ use Ipsum\Core\Concerns\Slug;
 
 class Categorie extends BaseModel
 {
-    use Slug, Sortable;
-
-    // TODO check champs html
+    use Slug, Sortable, Htmlable;
 
     protected $table = 'article_categories';
 
     protected $fillable = ['parent_id', 'slug', 'nom', 'description', 'order', 'seo_title', 'seo_description'];
 
     protected $slugBase = 'nom';
+
+    protected $htmlable = ['description'];
 
     public $timestamps = false;
     
