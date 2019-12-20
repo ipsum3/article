@@ -3,6 +3,7 @@
 namespace Ipsum\Article\app\Models;
 
 
+use Ipsum\Admin\Concerns\Htmlable;
 use Ipsum\Article\Concerns\Sortable;
 use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Core\Concerns\Slug;
