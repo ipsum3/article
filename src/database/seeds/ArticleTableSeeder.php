@@ -11,12 +11,18 @@ class ArticleTableSeeder extends Seeder
 {
     public function run()
     {
-        // Seed Post
-        factory(Article::class, 10)->create();
+        $articles = Article::all()->pluck('slug')->toArray();
 
-        // Sees Page
+        // Seed Page
         foreach ($this->getPages() as $page) {
-            factory(Article::class, 1)->create($page);
+            if (!in_array($page['slug'], $articles)) {
+                factory(Article::class, 1)->create($page);
+            }
+        }
+
+        if (!count($articles)) {
+            // Seed Post
+            factory(Article::class, 10)->create();
         }
 
         // Seed Catégorie
