@@ -78,7 +78,7 @@
             <div class="box-body">
                 <div class="upload"
                      data-uploadendpoint="{{ route('admin.media.store') }}"
-                     data-uploadmedias="{{ route('admin.media.publication', ['publication_type' => urlencode(\Ipsum\Article\app\Models\Article::class), 'publication_id' => $article->exists ? $article->id : '']) }}"
+                     data-uploadmedias="{{ route('admin.media.publication', ['publication_type' => \Ipsum\Article\app\Models\Article::class, 'publication_id' => $article->exists ? $article->id : '']) }}"
                      data-uploadrepertoire="article"
                      data-uploadpublicationid="{{ $article->id }}"
                      data-uploadpublicationtype="{{ \Ipsum\Article\app\Models\Article::class }}"
