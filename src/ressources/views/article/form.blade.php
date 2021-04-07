@@ -78,7 +78,7 @@
             <div class="box-body">
                 <div class="upload"
                      data-uploadendpoint="{{ route('admin.media.store') }}"
-                     data-uploadmedias="{{ route('admin.media.publication', [urlencode(\Ipsum\Article\app\Models\Article::class), 'publication_id' => $article->exists ? $article->id : '']) }}"
+                     data-uploadmedias="{{ route('admin.media.publication', ['publication_type' => urlencode(\Ipsum\Article\app\Models\Article::class), 'publication_id' => $article->exists ? $article->id : '']) }}"
                      data-uploadrepertoire="article"
                      data-uploadpublicationid="{{ $article->id }}"
                      data-uploadpublicationtype="{{ \Ipsum\Article\app\Models\Article::class }}"
@@ -94,7 +94,7 @@
                     <div class="upload-alerts mt-3"></div>
                     <div class="mt-3">
                         <h3>Médias associés :</h3>
-                        <div class="d-flex flex-row flex-wrap sortable upload-files" data-sortableurl="{{ route('admin.media.changeOrder', [urlencode(\Ipsum\Article\app\Models\Article::class), $article->exists ? $article->id : 0]) }}" data-sortablecsrftoken="{{ csrf_token() }}">
+                        <div class="d-flex flex-row flex-wrap sortable upload-files" data-sortableurl="{{ route('admin.media.changeOrder') }}" data-sortablecsrftoken="{{ csrf_token() }}">
                         </div>
                     </div>
                 </div>
