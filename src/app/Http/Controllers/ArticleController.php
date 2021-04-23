@@ -11,6 +11,7 @@ use Prologue\Alerts\Facades\Alert;
 
 class ArticleController extends AdminController
 {
+    protected $acces = 'article';
 
     public function index(Request $request, $type)
     {
