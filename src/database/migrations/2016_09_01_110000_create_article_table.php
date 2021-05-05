@@ -23,7 +23,7 @@ class CreateArticleTable extends Migration
             $table->string('titre');
             $table->string('nom')->nullable()->index();
             $table->text('extrait')->nullable();
-            $table->text('texte')->nullable();
+            $table->longText('texte')->nullable();
             $table->dateTime('date')->nullable();
             $table->string('seo_title')->nullable();
             $table->text('seo_description')->nullable();
