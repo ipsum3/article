@@ -22,7 +22,7 @@ class ArticleController extends AdminController
         }
         if ($request->filled('search')) {
             $query->where(function($query) use ($request) {
-                foreach (['titre', 'extrait', 'texte'] as $colonne) {
+                foreach (['titre', 'nom', 'extrait', 'texte'] as $colonne) {
                     $query->orWhere($colonne, 'like', '%'.$request->get('search').'%');
                 }
             });
