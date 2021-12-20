@@ -8,7 +8,7 @@ composer require ipsum3/article
 php artisan ipsum:article:install
 
 # Optional publish views
-php artisan vendor:publish --provider="Ipsum\Admin\ArticleServiceProvider" --tag=views
+php artisan vendor:publish --provider="Ipsum\Article\ArticleServiceProvider" --tag=views
 
 ```
 
