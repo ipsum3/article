@@ -3,14 +3,16 @@
 namespace Ipsum\Article\app\Models;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Ipsum\Admin\Concerns\Htmlable;
 use Ipsum\Article\Concerns\Sortable;
+use Ipsum\Article\database\Factories\CategorieFactory;
 use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Core\Concerns\Slug;
 
 class Categorie extends BaseModel
 {
-    use Slug, Sortable, Htmlable;
+    use Slug, Sortable, Htmlable, HasFactory;
 
     protected $table = 'article_categories';
 
@@ -21,6 +23,12 @@ class Categorie extends BaseModel
     protected $htmlable = ['description'];
 
     public $timestamps = false;
+
+
+    protected static function newFactory()
+    {
+        return CategorieFactory::new();
+    }
     
 
 

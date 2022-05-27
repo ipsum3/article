@@ -1,21 +1,24 @@
 <?php
+namespace Ipsum\Article\database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 use Ipsum\Article\app\Models\Categorie;
-use Faker\Generator as Faker;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
+class CategorieFactory extends Factory
+{
 
-$factory->define(Categorie::class, function (Faker $faker) {
-    return [
-        'nom' => $faker->sentence,
-    ];
-});
+    protected $model = Categorie::class;
+    
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition()
+    {
+        return [
+            'nom' => $this->faker->sentence()
+        ];
+    }
+}

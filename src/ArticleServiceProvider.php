@@ -2,7 +2,6 @@
 
 namespace Ipsum\Article;
 
-use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Ipsum\Article\app\Models\Article;
 use Ipsum\Article\app\Policies\ArticlePolicy;
@@ -36,7 +35,6 @@ class ArticleServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
-        app()->make(Factory::class)->load(__DIR__.'/database/factories');
         $this->loadViews();
         //$this->loadTranslationsFrom(__DIR__.'/ressources/lang', 'IpsumArticle');
 

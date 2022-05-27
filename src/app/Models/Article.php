@@ -3,14 +3,16 @@
 namespace Ipsum\Article\app\Models;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Ipsum\Admin\Concerns\Htmlable;
+use Ipsum\Article\database\Factories\ArticleFactory;
 use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Core\Concerns\Slug;
 use Ipsum\Media\Concerns\Mediable;
 
 class Article extends BaseModel
 {
-    use Slug, Mediable, Htmlable;
+    use Slug, Mediable, Htmlable, HasFactory;
 
     protected $table = 'articles';
 
@@ -29,6 +31,12 @@ class Article extends BaseModel
     protected $dates = [
         'date',
     ];
+
+
+    protected static function newFactory()
+    {
+        return ArticleFactory::new();
+    }
 
 
     /*

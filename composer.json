@@ -8,6 +8,9 @@
         }
     ],
     "minimum-stability": "stable",
+    "require": {
+        "php": "^8.0.2"
+    },
     "autoload": {
         "psr-4": {
             "Ipsum\\Article\\": "src"
