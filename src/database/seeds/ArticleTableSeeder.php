@@ -16,17 +16,17 @@ class ArticleTableSeeder extends Seeder
         // Seed Page
         foreach ($this->getPages() as $page) {
             if (!in_array($page['slug'], $articles)) {
-                factory(Article::class, 1)->create($page);
+                Article::factory()->create($page);
             }
         }
 
         if (!count($articles)) {
             // Seed Post
-            factory(Article::class, 10)->create();
+            Article::factory()->count(10)->create();
         }
 
         // Seed Catégorie
-        factory(Categorie::class, 3)->create();
+        Categorie::factory()->count(4)->create();
     }
 
     private function getPages()
@@ -54,6 +54,12 @@ class ArticleTableSeeder extends Seeder
                 'slug' => 'contact',
                 'titre' => 'Contact',
                 'nom' => 'Contact',
+                'type' => Article::TYPE_PAGE,
+            ),
+            array(
+                'slug' => 'blog',
+                'titre' => 'Blog',
+                'nom' => 'Blog',
                 'type' => Article::TYPE_PAGE,
             ),
             array(

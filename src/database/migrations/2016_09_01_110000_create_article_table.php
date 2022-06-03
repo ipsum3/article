@@ -19,7 +19,6 @@ class CreateArticleTable extends Migration
             $table->string('type', 20)->nullable();
             $table->string('etat')->default('publie');
             $table->integer('categorie_id')->nullable()->unsigned()->index();
-            $table->integer('media_id')->nullable();
             $table->string('titre');
             $table->string('nom')->nullable()->index();
             $table->text('extrait')->nullable();

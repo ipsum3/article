@@ -69,7 +69,7 @@ class ArticleServiceProvider extends ServiceProvider
         ], 'views');
     
         $this->publishes([
-            __DIR__.'/database/seeds/' => database_path('seeds'),
+            __DIR__.'/database/seeds/' => database_path('seederss'),
         ], 'install');
     }
 
