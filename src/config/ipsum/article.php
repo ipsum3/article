@@ -9,7 +9,8 @@ return [
         ],
         'post' => [
             'nom' => 'Post',
-            'has_categorie' => true
+            'has_categorie' => true,
+            //'categorie_parent_id'     => 4,
         ],
     ],
 
