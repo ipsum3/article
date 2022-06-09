@@ -32,7 +32,7 @@ class ArticleController extends AdminController
         }
         $articles = $query->latest()->paginate();
 
-        $categories = Categorie::root()->with('children')->orderBy('order')->get();
+        $categories = $this->getCategories($type);
 
         return view('IpsumArticle::article.index', compact('articles', 'type', 'categories'));
     }
@@ -41,7 +41,7 @@ class ArticleController extends AdminController
     {
         $article = new Article;
 
-        $categories = Categorie::root()->with('children')->orderBy('order')->get();
+        $categories = $this->getCategories($type);
 
         return view('IpsumArticle::article.form', compact('article', 'type', 'categories'));
     }
@@ -55,7 +55,7 @@ class ArticleController extends AdminController
 
     public function edit($type, Article $article)
     {
-        $categories = Categorie::root()->with('children')->orderBy('order')->get();
+        $categories = $this->getCategories($type);
 
         return view('IpsumArticle::article.form', compact('article', 'type', 'categories'));
     }
@@ -80,5 +80,12 @@ class ArticleController extends AdminController
         Alert::warning("L'enregistrement a bien été supprimé")->flash();
         return redirect()->route('admin.article.index', $type);
 
+    }
+    private function getCategories($type)
+    {
+        if($parent_id = config('ipsum.article.types.'.$type.'.categorie_parent_id')) {
+            return Categorie::where('parent_id',$parent_id)->with('children')->orderBy('order')->get();
+        }
+        return Categorie::root()->with('children')->orderBy('order')->get();
     }
 }
