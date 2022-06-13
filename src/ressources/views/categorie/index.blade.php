@@ -20,13 +20,13 @@
 
             <table class="table table-hover table-striped">
                 <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nom</th>
-                        <th>Description</th>
-                        <th>Ordre</th>
-                        <th width="160px">Actions</th>
-                    </tr>
+                <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Ordre</th>
+                    <th width="160px">Actions</th>
+                </tr>
                 </thead>
                 <tbody>
                 @foreach ($categories as $categorie_key => $categorie)
@@ -47,7 +47,9 @@
                                 @csrf
                                 @method('DELETE')
                                 <a class="btn btn-primary" href="{{ route('admin.articleCategorie.edit', $categorie) }}"><i class="fa fa-edit"></i> Modifier</a>
-                                <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash-alt"></i></button>
+                                @if(config('ipsum.article.categories.guard_id') AND !in_array($categorie->id,config('ipsum.article.categories.guard_id')))
+                                    <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash-alt"></i></button>
+                                @endif
                             </form>
                         </td>
                     </tr>
@@ -58,10 +60,10 @@
                             <td>{{ Str::limit(strip_tags($child->description)) }}</td>
                             <td>
                                 @if($child_key < $categorie->children->count() - 1)
-                                    <a href="{{ route('admin.articleCategorie.changeOrder', [$child, 'down']) }}" ><span class="fa fa-arrow-down"></span></a>
+                                    <a href="{{ route('admin.articleCategorie.changeOrder', [$child, 'down']) }}"><span class="fa fa-arrow-down"></span></a>
                                 @endif
                                 @if($child_key)
-                                    <a href="{{ route('admin.articleCategorie.changeOrder', [$child, 'up']) }}" ><span class="fa fa-arrow-up"></span></a>
+                                    <a href="{{ route('admin.articleCategorie.changeOrder', [$child, 'up']) }}"><span class="fa fa-arrow-up"></span></a>
                                 @endif
                             </td>
                             <td class="text-right">

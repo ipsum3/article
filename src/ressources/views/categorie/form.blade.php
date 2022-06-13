@@ -16,9 +16,12 @@
                         <a class="btn btn-outline-secondary" href="{{ route('admin.articleCategorie.create') }}" data-toggle="tooltip" title="Ajouter">
                             <i class="fas fa-plus"></i>
                         </a>&nbsp;
-                        <a class="btn btn-outline-danger" href="{{ route('admin.articleCategorie.delete', $categorie) }}" data-toggle="tooltip" title="Supprimer">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
+                        @if(config('ipsum.article.categories.guard_id') AND !in_array($categorie->id,config('ipsum.article.categories.guard_id')))
+                            <a class="btn btn-outline-danger" href="{{ route('admin.articleCategorie.delete', $categorie) }}" data-toggle="tooltip"
+                               title="Supprimer">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        @endif
                     @endif
                 </div>
             </div>

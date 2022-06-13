@@ -13,6 +13,11 @@ return [
             //'categorie_parent_id'     => 4,
         ],
     ],
+    'categories' => [
+        'guard_id'=>[
+        
+        ]
+    ],
 
     'etats' => [
         'publie' => 'Publié',
