@@ -48,7 +48,7 @@ class ArticleController extends AdminController
 
     public function store(StoreArticle $request, $type)
     {
-        $article = Article::create($request->all());
+        $article = Article::create($request->validated());
         Alert::success("L'enregistrement a bien été ajouté")->flash();
         return redirect()->route('admin.article.edit', [$type, $article->id]);
     }
@@ -62,7 +62,7 @@ class ArticleController extends AdminController
 
     public function update(StoreArticle $request, $type, Article $article)
     {
-        $article->update($request->all());
+        $article->update($request->validated());
 
         Alert::success("L'enregistrement a bien été modifié")->flash();
         return back();
