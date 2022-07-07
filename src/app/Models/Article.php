@@ -3,6 +3,7 @@
 namespace Ipsum\Article\app\Models;
 
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Ipsum\Admin\Concerns\Htmlable;
 use Ipsum\Article\database\Factories\ArticleFactory;
@@ -53,17 +54,17 @@ class Article extends BaseModel
      * Scopes
      */
 
-    public function scopePosts($query)
+    public function scopePosts(Builder $query)
     {
         return $query->where('type', self::TYPE_POST);
     }
 
-    public function scopePages($query)
+    public function scopePages(Builder $query)
     {
         return $query->where('type', self::TYPE_PAGE);
     }
 
-    public function scopePublie($query)
+    public function scopePublie(Builder $query)
     {
         return $query->where('etat', self::ETAT_PUBLIE);
     }

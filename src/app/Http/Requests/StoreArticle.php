@@ -31,6 +31,11 @@ class StoreArticle extends FormRequest
         return [
             "categorie_id" => "nullable|integer|exists:article_categories,id",
             'titre' => 'required|max:255',
+            'extrait' => '',
+            'texte' => '',
+            'seo_title' => '',
+            'seo_description' => '',
+            'slug' => '',
             'type' => 'required|in:'.implode(',', $types),
             'etat' => 'required|in:'.implode(',', $etats),
             'date' => 'nullable|date'

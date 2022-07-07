@@ -27,6 +27,10 @@ class StoreCategorie extends FormRequest
         return [
             'parent_id' => 'nullable|exists:article_categories,id,parent_id,NULL',
             'nom' => 'required|max:255',
+            'description' => '',
+            'seo_title' => '',
+            'seo_description' => '',
+            'slug' => '',
         ];
     }
 
