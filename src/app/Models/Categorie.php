@@ -6,7 +6,7 @@ namespace Ipsum\Article\app\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Ipsum\Admin\Concerns\Htmlable;
 use Ipsum\Article\Concerns\Sortable;
-use Ipsum\Article\database\Factories\CategorieFactory;
+use Ipsum\Article\database\factories\CategorieFactory;
 use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Core\Concerns\Slug;
 

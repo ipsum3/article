@@ -6,7 +6,7 @@ namespace Ipsum\Article\app\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Ipsum\Admin\Concerns\Htmlable;
-use Ipsum\Article\database\Factories\ArticleFactory;
+use Ipsum\Article\database\factories\ArticleFactory;
 use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Core\Concerns\Slug;
 use Ipsum\Media\Concerns\Mediable;
