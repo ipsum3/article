@@ -47,10 +47,7 @@ class ArticleServiceProvider extends ServiceProvider
 
     public function loadViews()
     {
-        $this->loadViewsFrom([
-            resource_path('views/ipsum/article'),
-            __DIR__.'/ressources/views',
-        ], 'IpsumArticle');
+        $this->loadViewsFrom( __DIR__.'/ressources/views', 'IpsumArticle');
 
     }
 
