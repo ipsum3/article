@@ -16,7 +16,7 @@ class ArticleTableSeeder extends Seeder
         // Seed Page
         foreach ($this->getPages() as $page) {
             if (!in_array($page['slug'], $articles)) {
-                Article::factory()->create($page);
+                Article::create($page);
             }
         }
 
