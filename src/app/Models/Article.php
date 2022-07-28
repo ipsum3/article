@@ -11,6 +11,45 @@ use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Core\Concerns\Slug;
 use Ipsum\Media\Concerns\Mediable;
 
+/**
+ * Ipsum\Article\app\Models\Article
+ *
+ * @property int $id
+ * @property string $slug
+ * @property string|null $type
+ * @property string $etat
+ * @property int|null $categorie_id
+ * @property int|null $media_id
+ * @property string $titre
+ * @property string|null $nom
+ * @property string|null $extrait
+ * @property string|null $texte
+ * @property \Illuminate\Support\Carbon|null $date
+ * @property string|null $seo_title
+ * @property string|null $seo_description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Ipsum\Article\app\Models\Categorie|null $categorie
+ * @property-read mixed $etat_to_string
+ * @property-read mixed $is_deletable
+ * @property-read mixed $is_page
+ * @property-read mixed $is_post
+ * @property-read mixed $is_publie
+ * @property-read mixed $tag_meta_description
+ * @property-read mixed $tag_title
+ * @property-read mixed $type_nom
+ * @property-read \Ipsum\Media\app\Models\Media|null $illustration
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Ipsum\Media\app\Models\Media[] $medias
+ * @property-read int|null $medias_count
+ * @method static \Ipsum\Article\database\factories\ArticleFactory factory(...$parameters)
+ * @method static Builder|Article newModelQuery()
+ * @method static Builder|Article newQuery()
+ * @method static Builder|Article pages()
+ * @method static Builder|Article posts()
+ * @method static Builder|Article publie()
+ * @method static Builder|Article query()
+ * @mixin \Eloquent
+ */
 class Article extends BaseModel
 {
     use Slug, Mediable, Htmlable, HasFactory;

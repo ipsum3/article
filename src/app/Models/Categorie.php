@@ -10,6 +10,32 @@ use Ipsum\Article\database\factories\CategorieFactory;
 use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Core\Concerns\Slug;
 
+/**
+ * Ipsum\Article\app\Models\Categorie
+ *
+ * @property int $id
+ * @property int|null $parent_id
+ * @property string $slug
+ * @property string $nom
+ * @property string|null $description
+ * @property int|null $order
+ * @property string|null $seo_title
+ * @property string|null $seo_description
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Ipsum\Article\app\Models\Article[] $articles
+ * @property-read int|null $articles_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|Categorie[] $children
+ * @property-read int|null $children_count
+ * @property-read mixed $is_root
+ * @property-read mixed $tag_meta_description
+ * @property-read mixed $tag_title
+ * @property-read Categorie|null $parent
+ * @method static \Ipsum\Article\database\factories\CategorieFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Categorie newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Categorie newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Categorie query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Categorie root()
+ * @mixin \Eloquent
+ */
 class Categorie extends BaseModel
 {
     use Slug, Sortable, Htmlable, HasFactory;
