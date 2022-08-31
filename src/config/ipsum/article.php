@@ -19,4 +19,15 @@ return [
         'brouillon' => 'Brouillon'
     ],
 
+    /*'custom_fields' => [
+        [
+            'name' => 'champ',
+            'label' => 'Nom champ',
+            'description' => '',
+            'defaut' => '',
+            'type' => 'input',
+            'rules' => 'nullable|string'
+        ]
+    ]*/
+
 ];

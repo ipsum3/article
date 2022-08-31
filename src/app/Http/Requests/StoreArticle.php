@@ -28,6 +28,14 @@ class StoreArticle extends FormRequest
         $types =  array_keys(config('ipsum.article.types'));
         $etats =  array_keys(config('ipsum.article.etats'));
 
+        $rules = [];
+
+        if (config('ipsum.article.custom_fields')) {
+            foreach (config('ipsum.article.custom_fields') as $field) {
+                $rules['custom_fields.'.$field['name']] = $field['rules'];
+            }
+        }
+
         return [
             "categorie_id" => "nullable|integer|exists:article_categories,id",
             'titre' => 'required|max:255',
@@ -39,7 +47,7 @@ class StoreArticle extends FormRequest
             'type' => 'required|in:'.implode(',', $types),
             'etat' => 'required|in:'.implode(',', $etats),
             'date' => 'nullable|date'
-        ];
+        ] + $rules;
     }
 
 }

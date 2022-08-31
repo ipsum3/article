@@ -5,6 +5,7 @@ namespace Ipsum\Article\app\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Ipsum\Admin\app\Casts\AsCustomFieldsObject;
 use Ipsum\Admin\Concerns\Htmlable;
 use Ipsum\Article\database\factories\ArticleFactory;
 use Ipsum\Core\app\Models\BaseModel;
@@ -19,11 +20,11 @@ use Ipsum\Media\Concerns\Mediable;
  * @property string|null $type
  * @property string $etat
  * @property int|null $categorie_id
- * @property int|null $media_id
  * @property string $titre
  * @property string|null $nom
  * @property string|null $extrait
  * @property string|null $texte
+ * @property mixed|null $custom_fields
  * @property \Illuminate\Support\Carbon|null $date
  * @property string|null $seo_title
  * @property string|null $seo_description
@@ -56,13 +57,16 @@ class Article extends BaseModel
 
     protected $table = 'articles';
 
-    protected $fillable = ['slug', 'type', 'etat', 'categorie_id', 'titre', 'extrait', 'texte', 'date', 'seo_title', 'seo_description'];
+    protected $fillable = ['slug', 'type', 'etat', 'categorie_id', 'titre', 'extrait', 'texte', 'custom_fields', 'date', 'seo_title', 'seo_description'];
 
     protected $slugBase = 'titre';
 
     protected $htmlable = ['extrait', 'texte'];
-    
-    
+
+    protected $casts = [
+        'custom_fields' => AsCustomFieldsObject::class,
+    ];
+
     const TYPE_PAGE = 'page';
     const TYPE_POST = 'post';
 

@@ -14,14 +14,14 @@
                     <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i> Enregistrer</button>&nbsp;
                     <button class="btn btn-outline-secondary" type="reset" data-toggle="tooltip" title="Annuler les modifications en cours"><i class="fas fa-undo"></i></button>&nbsp;
                     @if ($article->exists)
-                    <a class="btn btn-outline-secondary" href="{{ route('admin.article.create', $type) }}" data-toggle="tooltip" title="Ajouter">
-                        <i class="fas fa-plus"></i>
-                    </a>&nbsp;
-                    @if ($article->is_deletable)
-                    <a class="btn btn-outline-danger" href="{{ route('admin.article.delete', $article) }}" data-toggle="tooltip" title="Supprimer">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
-                    @endif
+                        <a class="btn btn-outline-secondary" href="{{ route('admin.article.create', $type) }}" data-toggle="tooltip" title="Ajouter">
+                            <i class="fas fa-plus"></i>
+                        </a>&nbsp;
+                        @if ($article->is_deletable)
+                            <a class="btn btn-outline-danger" href="{{ route('admin.article.delete', $article) }}" data-toggle="tooltip" title="Supprimer">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        @endif
                     @endif
                 </div>
             </div>
@@ -41,7 +41,7 @@
                             @endforeach
                         </select>
                         @error('categorie_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                 @endif
@@ -53,12 +53,34 @@
                 <script src="{{ asset('ipsum/admin/dist/tinymce.js') }}"></script>
             </div>
         </div>
+
+        @if (config('ipsum.article.custom_fields'))
+            <div class="box">
+                <div class="box-header">
+                    <h2 class="box-title">
+                        Informations complémentaires
+                    </h2>
+                </div>
+                <div class="box-body">
+                    @foreach(config('ipsum.article.custom_fields') as $field)
+                        <x-admin::custom
+                                name="{{ 'custom_fields['.$field['name'].']' }}"
+                                label="{{ $field['label'] }}"
+                                description="{{ $field['description'] }}"
+                                value="{{ old('custom_fields.'.$field['name'], $article->custom_fields->{$field['name']}) }}"
+                                type="{{ $field['type'] }}"
+                        />
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
         <div class="box">
             <div class="box-header">
                 <h2 class="box-title">
                     Publication
                     @if ($article->exists)
-                    <small class="text-muted">&nbsp;Créé le <span data-toggle="tooltip"  title="{{ $article->created_at }}">{{ $article->created_at->format('d/m/Y')  }}</span> et modifié le <span data-toggle="tooltip"  title="{{ $article->updated_at }}">{{ $article->updated_at->format('d/m/Y')  }}</span></small>
+                        <small class="text-muted">&nbsp;Créé le <span data-toggle="tooltip"  title="{{ $article->created_at }}">{{ $article->created_at->format('d/m/Y')  }}</span> et modifié le <span data-toggle="tooltip"  title="{{ $article->updated_at }}">{{ $article->updated_at->format('d/m/Y')  }}</span></small>
                     @endif
                 </h2>
             </div>
