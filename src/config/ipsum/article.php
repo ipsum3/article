@@ -14,6 +14,12 @@ return [
         ],
     ],
 
+    'categories' => [
+        'guard_id' => [
+            //1
+        ]
+    ],
+
     'etats' => [
         'publie' => 'Publié',
         'brouillon' => 'Brouillon'
