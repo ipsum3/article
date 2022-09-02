@@ -46,8 +46,8 @@
                             <form action="{{ route('admin.articleCategorie.destroy', $categorie) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a class="btn btn-primary" href="{{ route('admin.articleCategorie.edit', $categorie) }}"><i class="fa fa-edit"></i> Modifier</a>
                                 @if(config('ipsum.article.categories.guard_id') AND !in_array($categorie->id,config('ipsum.article.categories.guard_id')))
+                                    <a class="btn btn-primary" href="{{ route('admin.articleCategorie.edit', $categorie) }}"><i class="fa fa-edit"></i> Modifier</a>
                                     <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash-alt"></i></button>
                                 @endif
                             </form>
