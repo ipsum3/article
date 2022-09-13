@@ -32,7 +32,11 @@ return [
             'description' => '',
             'defaut' => '',
             'type' => 'input',
-            'rules' => 'nullable|string'
+            'rules' => 'nullable|string',
+            'conditions' => [
+                'article_types' => ['type_article'],
+                'article_noms' => ['nom_article'],
+            ],
         ]
     ]*/
 

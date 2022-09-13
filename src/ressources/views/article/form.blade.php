@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        @if (config('ipsum.article.custom_fields'))
+        @if ( $article->custom_fields_active )
             <div class="box">
                 <div class="box-header">
                     <h2 class="box-title">
@@ -62,18 +62,20 @@
                     </h2>
                 </div>
                 <div class="box-body">
-                    @foreach(config('ipsum.article.custom_fields') as $field)
+                    @foreach($article->custom_fields_active as $field)
                         <x-admin::custom
                                 name="{{ 'custom_fields['.$field['name'].']' }}"
                                 label="{{ $field['label'] }}"
                                 description="{{ $field['description'] }}"
-                                value="{{ old('custom_fields.'.$field['name'], $article->custom_fields->{$field['name']}) }}"
+                                value="{!! old('custom_fields.'.$field['name'], $article->custom_fields->{$field['name']}) !!}"
                                 type="{{ $field['type'] }}"
                         />
                     @endforeach
                 </div>
             </div>
         @endif
+
+
 
         <div class="box">
             <div class="box-header">

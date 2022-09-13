@@ -31,6 +31,7 @@ use Ipsum\Media\Concerns\Mediable;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Ipsum\Article\app\Models\Categorie|null $categorie
+ * @property-read mixed $custom_fields_active
  * @property-read mixed $etat_to_string
  * @property-read mixed $is_deletable
  * @property-read mixed $is_page
@@ -49,6 +50,7 @@ use Ipsum\Media\Concerns\Mediable;
  * @method static Builder|Article posts()
  * @method static Builder|Article publie()
  * @method static Builder|Article query()
+ * @method static Builder|Article recettes()
  * @mixin \Eloquent
  */
 class Article extends BaseModel
@@ -69,6 +71,7 @@ class Article extends BaseModel
 
     const TYPE_PAGE = 'page';
     const TYPE_POST = 'post';
+    const TYPE_RECETTE = 'recette';
 
     const ETAT_PUBLIE = 'publie';
 
@@ -82,6 +85,20 @@ class Article extends BaseModel
         return ArticleFactory::new();
     }
 
+
+    /*
+     * Functions
+     */
+
+    protected function htmlableAttributes() {
+        $htmlable = $this->htmlable;
+        foreach( config('ipsum.article.custom_fields') as $field ) {
+            if( in_array( $field['type'], ['html', 'html-simple'] ) ) {
+                $htmlable[] = $field['name'];
+            }
+        }
+        return $htmlable;
+    }
 
     /*
      * Relations
@@ -111,8 +128,11 @@ class Article extends BaseModel
     {
         return $query->where('etat', self::ETAT_PUBLIE);
     }
-    
-    
+
+    public function scopeRecettes(Builder $query)
+    {
+        return $query->where('type', self::TYPE_RECETTE);
+    }
     
     /*
      * Accessors & Mutators
@@ -161,5 +181,19 @@ class Article extends BaseModel
     public function getIsDeletableAttribute()
     {
         return $this->attributes['nom'] === null;
+    }
+
+    public function getCustomFieldsActiveAttribute()
+    {
+        $customFieldsActive = [];
+        foreach( config('ipsum.article.custom_fields') as $field ) {
+            if( isset( $field['conditions'] ) ) {
+                if( array_key_exists( 'article_types', $field['conditions'] ) && in_array( $this->type, $field['conditions']['article_types'] )
+                    || array_key_exists( 'article_noms', $field['conditions'] ) && in_array( $this->nom, $field['conditions']['article_noms'] ) ) {
+                    $customFieldsActive[] = $field;
+                }
+            }
+        }
+        return $customFieldsActive;
     }
 }
