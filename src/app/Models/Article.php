@@ -175,7 +175,7 @@ class Article extends BaseModel
 
     public function getNomAttribute()
     {
-        return $this->attributes['nom'] === null ? $this->titre : $this->attributes['nom'];
+        return empty( $this->attributes['nom'] ) ? $this->titre : $this->attributes['nom'];
     }
 
     public function getIsDeletableAttribute()
