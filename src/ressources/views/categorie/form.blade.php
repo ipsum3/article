@@ -8,12 +8,12 @@
     {{ Aire::open()->route($categorie->exists ? 'admin.articleCategorie.update' : 'admin.articleCategorie.store', $categorie->exists ? $categorie : null)->bind($categorie)->formRequest(\Ipsum\Article\app\Http\Requests\StoreCategorie::class) }}
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">{{ $categorie->exists ? 'Modification' : 'Ajout' }}</h3>
+                <h3 class="box-title">{{ $categorie->exists ? 'Modification' : 'Ajout catégorie ' . $type }}</h3>
                 <div class="btn-toolbar">
                     <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i> Enregistrer</button>&nbsp;
                     <button class="btn btn-outline-secondary" type="reset" data-toggle="tooltip" title="Annuler les modifications en cours"><i class="fas fa-undo"></i></button>&nbsp;
                     @if ($categorie->exists)
-                        <a class="btn btn-outline-secondary" href="{{ route('admin.articleCategorie.create') }}" data-toggle="tooltip" title="Ajouter">
+                        <a class="btn btn-outline-secondary" href="{{ route('admin.articleCategorie.create',[$categorie->type]) }}" data-toggle="tooltip" title="Ajouter">
                             <i class="fas fa-plus"></i>
                         </a>&nbsp;
                         <a class="btn btn-outline-danger" href="{{ route('admin.articleCategorie.delete', $categorie) }}" data-toggle="tooltip" title="Supprimer">
@@ -23,6 +23,7 @@
                 </div>
             </div>
             <div class="box-body">
+                {{ Aire::hidden('type', $categorie->exists ? $categorie->type : $type) }}
                 {{ Aire::input('nom', 'Nom*') }}
                 {{ Aire::select(collect(['' => '---- Base -----'])->union($categories), 'parent_id', 'Catégorie parente') }}
                 {{ Aire::textArea('description', 'Description')->class('tinymce-simple') }}

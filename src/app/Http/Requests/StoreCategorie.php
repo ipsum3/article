@@ -28,6 +28,7 @@ class StoreCategorie extends FormRequest
             'parent_id' => 'nullable|exists:article_categories,id,parent_id,NULL',
             'nom' => 'required|max:255',
             'description' => '',
+            'type' => 'required|in:'. implode(",", config('ipsum.categorie.types') ),
             'seo_title' => '',
             'seo_description' => '',
             'slug' => '',

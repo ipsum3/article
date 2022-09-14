@@ -12,18 +12,21 @@ class CategorieController extends AdminController
 
     public function index()
     {
-        $categories = Categorie::root()->with('children')->orderBy('order')->get();
+        $categories_by_type = [];
+        foreach ( config('ipsum.categorie.types') as $type ) {
+            $categories_by_type[$type] = Categorie::where('type', $type )->root($type)->with('children')->orderBy('order')->get();
+        }
 
-        return view('IpsumArticle::categorie.index', compact('categories'));
+        return view('IpsumArticle::categorie.index', compact('categories_by_type'));
     }
 
-    public function create()
+    public function create( $type )
     {
         $categorie = new Categorie;
 
-        $categories = Categorie::root()->get()->pluck('nom', 'id');
+        $categories = Categorie::root($type)->get()->pluck('nom', 'id');
 
-        return view('IpsumArticle::categorie.form', compact('categorie', 'categories'));
+        return view('IpsumArticle::categorie.form', compact('categorie', 'categories', 'type'));
     }
 
     public function store(StoreCategorie $request)
@@ -36,7 +39,7 @@ class CategorieController extends AdminController
 
     public function edit(Categorie $categorie)
     {
-        $categories = Categorie::root()->get()->pluck('nom', 'id');
+        $categories = Categorie::root($categorie->type)->where('id', '!=', $categorie->id)->get()->pluck('nom', 'id');
         return view('IpsumArticle::categorie.form', compact('categorie', 'categories'));
     }
 
@@ -72,7 +75,7 @@ class CategorieController extends AdminController
 
         $categorie_suivante = Categorie::where('parent_id', $categorie->parent_id)->where('order', $categorie->order + ($direction == 'up' ? -1 : +1))->first();
         if(!$categorie_suivante) {
-            Categorie::updateOrder($categorie->parent_id); // En cas d'erreur on retrie les categories
+            Categorie::updateOrder($categorie->parent_id, $categorie->type); // En cas d'erreur on retrie les categories
         } else {
             $categorie->order = $categorie_suivante->order;
             $categorie_suivante->order = $categorie->getOriginal('order');

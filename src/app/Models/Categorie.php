@@ -17,6 +17,7 @@ use Ipsum\Core\Concerns\Slug;
  * @property int|null $parent_id
  * @property string $slug
  * @property string $nom
+ * @property string $type
  * @property string|null $description
  * @property int|null $order
  * @property string|null $seo_title
@@ -33,7 +34,7 @@ use Ipsum\Core\Concerns\Slug;
  * @method static \Illuminate\Database\Eloquent\Builder|Categorie newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Categorie newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Categorie query()
- * @method static \Illuminate\Database\Eloquent\Builder|Categorie root()
+ * @method static \Illuminate\Database\Eloquent\Builder|Categorie root(string $type)
  * @mixin \Eloquent
  */
 class Categorie extends BaseModel
@@ -42,7 +43,7 @@ class Categorie extends BaseModel
 
     protected $table = 'article_categories';
 
-    protected $fillable = ['parent_id', 'slug', 'nom', 'description', 'order', 'seo_title', 'seo_description'];
+    protected $fillable = ['parent_id', 'slug', 'nom', 'description', 'type', 'order', 'seo_title', 'seo_description'];
 
     protected $slugBase = 'nom';
 
@@ -93,9 +94,9 @@ class Categorie extends BaseModel
      * Scopes
      */
 
-    public function scopeRoot($query)
+    public function scopeRoot($query, string $type)
     {
-        return $query->where('parent_id', null)->orderBy('order');
+        return $query->where('parent_id', null)->where('type', $type)->orderBy('order');
     }
     
     

@@ -82,6 +82,10 @@ class ArticleServiceProvider extends ServiceProvider
             __DIR__.'/config/ipsum/article.php', 'ipsum.article'
         );
 
+        $this->mergeConfigFrom(
+            __DIR__.'/config/ipsum/categorie.php', 'ipsum.categorie'
+        );
+
         // register the artisan commands
         $this->commands($this->commands);
     }

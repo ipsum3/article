@@ -16,7 +16,7 @@ Route::group(
             "as" => "admin.articleCategorie.store",
             "uses" => "CategorieController@store",
         ));
-        Route::get("categorie/create", array(
+        Route::get("categorie/{type}/create", array(
             "as" => "admin.articleCategorie.create",
             "uses" => "CategorieController@create",
         ));

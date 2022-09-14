@@ -22,22 +22,22 @@ trait Sortable
                 // On récupère le dernier order
                 $objet->order = self::where('parent_id', $objet->parent_id)->count() + 1;
 
-                self::updateOrder($objet->getOriginal('parent_id'), $objet->id);
+                self::updateOrder($objet->getOriginal('parent_id'), $objet->type, $objet->id);
 
             }
         });
 
         self::deleted(function(self $objet)
         {
-            self::updateOrder($objet->parent_id);
+            self::updateOrder($objet->parent_id, $objet->type);
         });
     }
 
 
 
-    static public function updateOrder($parent_id = null, $exclude_id = null)
+    static public function updateOrder($parent_id = null, string $type, $exclude_id = null)
     {
-        $query = self::select(['id', 'order', 'parent_id'])/*->where('id', '!=', )*/;
+        $query = self::select(['id', 'order', 'parent_id'])->where('type', $type)/*->where('id', '!=', )*/;
         if ($parent_id !== null) {
             $query->where('parent_id', $parent_id);
         }
