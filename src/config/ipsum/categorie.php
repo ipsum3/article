@@ -7,7 +7,10 @@ return [
 
     'groupes' => [
         /*'default' => [
-            'conditions' => [],
+            'conditions' => [
+                'categorie_ids' => [X, XX, XXX],
+                'categorie_types' => [XXXXXX],
+            ],
             'categorie' => false,
             'medias' => [
                 ['groupe' => '']
