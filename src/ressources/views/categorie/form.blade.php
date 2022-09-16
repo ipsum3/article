@@ -16,9 +16,11 @@
                         <a class="btn btn-outline-secondary" href="{{ route('admin.articleCategorie.create',[$categorie->type]) }}" data-toggle="tooltip" title="Ajouter">
                             <i class="fas fa-plus"></i>
                         </a>&nbsp;
-                        <a class="btn btn-outline-danger" href="{{ route('admin.articleCategorie.delete', $categorie) }}" data-toggle="tooltip" title="Supprimer">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
+                        @if (!$categorie->config['is_guarded'])
+                            <a class="btn btn-outline-danger" href="{{ route('admin.articleCategorie.delete', $categorie) }}" data-toggle="tooltip" title="Supprimer">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        @endif
                     @endif
                 </div>
             </div>

@@ -49,7 +49,9 @@
                                     @method('DELETE')
                                     {{--@if(!config('ipsum.article.categories.guard_id') OR !in_array($categorie->id,config('ipsum.article.categories.guard_id')))--}}
                                         <a class="btn btn-primary" href="{{ route('admin.articleCategorie.edit', $categorie) }}"><i class="fa fa-edit"></i> Modifier</a>
-                                        <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash-alt"></i></button>
+                                        @if( !$categorie->config['is_guarded'] )
+                                            <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash-alt"></i></button>
+                                        @endif
                                     {{--@endif--}}
                                 </form>
                             </td>

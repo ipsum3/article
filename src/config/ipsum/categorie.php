@@ -6,12 +6,14 @@ return [
     ],
 
     'groupes' => [
-        /*[
-            'conditions' => [
-                'article_types' => ['post']
+        /*'default' => [
+            'conditions' => [],
+            'categorie' => false,
+            'medias' => [
+                ['groupe' => '']
             ],
-            'is_guarded' => false
-        ]*/
+            'is_guarded' => false,
+        ],*/
     ],
 
 ];

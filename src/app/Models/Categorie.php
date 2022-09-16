@@ -120,4 +120,15 @@ class Categorie extends BaseModel
         return $this->attributes['seo_description'] == '' ? $this->description : $this->attributes['seo_description'];
     }
 
+    public function getConfigAttribute(): array {
+        $config = [];
+        foreach( config('ipsum.categorie.groupes') as $groupe ) {
+            if( array_key_exists( 'categorie_types', $groupe['conditions'] ) && in_array( $this->type, $groupe['conditions']['categorie_types'] )
+                || array_key_exists( 'categorie_ids', $groupe['conditions'] ) && in_array( $this->id, $groupe['conditions']['categorie_ids'] ) ) {
+                $config = $groupe;
+                break;
+            }
+        }
+        return $config + config('ipsum.categorie.groupes.default');
+    }
 }
