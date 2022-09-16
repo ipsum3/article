@@ -6,7 +6,6 @@ return [
     ],
 
     'groupes' => [
-        //TODO is guarded
         /*[
             'conditions' => [
                 'article_types' => ['post']

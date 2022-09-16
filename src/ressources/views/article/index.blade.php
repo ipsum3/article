@@ -19,8 +19,7 @@
             {{ Aire::open()->class('form-inline mt-4 mb-1')->route('admin.article.index', $type) }}
                 <label class="sr-only" for="search">Recherche</label>
                 {{ Aire::input('search')->id('search')->class('form-control mb-2 mr-sm-2')->value(request()->get('search'))->placeholder('Recherche')->withoutGroup() }}
-
-                @if (config('ipsum.article.types.'.$type.'.has_categorie'))
+                @if ( count( $categories ) )
                     <label class="sr-only" for="categorie_id">Catégorie</label>
                     <select id="categorie_id" name="categorie_id" class="form-control mb-2 mr-sm-2" style="max-width: 300px;">
                         <option value="">---- Catégories -----</option>
@@ -72,7 +71,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <a class="btn btn-primary" href="{{ route('admin.article.edit', [$type, $article]) }}"><i class="fa fa-edit"></i> Modifier</a>
-                                @if ($article->is_deletable)
+                                @if( !$article->config['is_guarded'] )
                                     <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash-alt"></i></button>
                                 @endif
                             </form>

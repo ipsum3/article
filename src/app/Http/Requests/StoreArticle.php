@@ -25,7 +25,7 @@ class StoreArticle extends FormRequest
      */
     public function rules()
     {
-        $types =  array_keys(config('ipsum.article.types'));
+        $types =  config('ipsum.article.types');
         $etats =  array_keys(config('ipsum.article.etats'));
 
         $rules = [];

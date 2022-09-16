@@ -41,7 +41,9 @@ class ArticleController extends AdminController
     {
         $article = new Article;
 
-        $categories = Categorie::where('type', $type )->with('children')->orderBy('order')->get();
+        $article->type = $type;
+
+        $categories = $article->config['categorie'] ? Categorie::root( $article->config['categorie']['type'] )->with('children')->orderBy('order')->get() : null;
 
         return view('IpsumArticle::article.form', compact('article', 'type', 'categories'));
     }
@@ -55,8 +57,7 @@ class ArticleController extends AdminController
 
     public function edit($type, Article $article)
     {
-        $categories = Categorie::where('type', $type )->with('children')->orderBy('order')->get();
-
+        $categories = $article->config['categorie'] ? Categorie::root( $article->config['categorie']['type'] )->with('children')->orderBy('order')->get() : null;
         return view('IpsumArticle::article.form', compact('article', 'type', 'categories'));
     }
 

@@ -3,20 +3,69 @@
 return [
 
     'types' => [
-        'page' => [
-            'nom' => 'Pages',
-            'has_categorie' => false
-        ],
-        'post' => [
-            'nom' => 'Post',
-            'has_categorie' => true,
-            //'categorie_parent_id' => 4,
-        ],
+        'page',
+        'post',
+        /*'XXXXXXXX'*/
     ],
 
-    'categories' => [
-        'guard_id' => [
-            //1
+    'groupes' => [
+        'default' => [
+            'conditions' => [
+
+            ],
+            'categorie' => false,
+            'medias' => [
+                ['groupe' => '']
+            ],
+            'custom_fields' => [],
+            'is_guarded' => false,
+            /*'publication' => [
+
+            ],*/
+            'has_extrait' => true,
+            'has_texte' => true,
+        ],
+        /*'example' => [
+            'conditions' => [
+                'article_types' => ['solution']
+            ],
+            'custom_fields' => [
+                [
+                    'name' => 'url',
+                    'label' => 'champXXXX',
+                    'description' => '',
+                    'defaut' => '',
+                    'type' => 'url',
+                    'rules' => 'nullable|url',
+                ]
+            ],
+            'categorie' => [
+                'type' => 'XXXXXX'
+            ],
+            'medias' => [
+                ['groupe' => ''],
+                ['groupe' => 'XXXXXXXXX']
+            ],
+            'is_guarded' => false,
+            'publication' => [
+
+            ],
+            'hide_extrait' => true,
+            'hide_texte' => true,
+        ],*/
+        'page' => [
+            'conditions' => [
+                'article_types' => ['page']
+            ],
+            'is_guarded' => true
+        ],
+        'post' => [
+            'conditions' => [
+                'article_types' => ['post']
+            ],
+            'categorie' => [
+                'type' => 'post'
+            ]
         ]
     ],
 
@@ -24,20 +73,5 @@ return [
         'publie' => 'Publié',
         'brouillon' => 'Brouillon'
     ],
-
-    /*'custom_fields' => [
-        [
-            'name' => 'champ',
-            'label' => 'Nom champ',
-            'description' => '',
-            'defaut' => '',
-            'type' => 'input',
-            'rules' => 'nullable|string',
-            'conditions' => [
-                'article_types' => ['type_article'],
-                'article_noms' => ['nom_article'],
-            ],
-        ]
-    ]*/
 
 ];

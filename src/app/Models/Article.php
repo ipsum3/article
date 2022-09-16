@@ -92,7 +92,7 @@ class Article extends BaseModel
 
     protected function htmlableAttributes() {
         $htmlable = $this->htmlable;
-        foreach( config('ipsum.article.custom_fields') as $field ) {
+        foreach( $this->config['custom_fields'] as $field ) {
             if( in_array( $field['type'], ['html', 'html-simple'] ) ) {
                 $htmlable[] = $field['name'];
             }
@@ -129,10 +129,7 @@ class Article extends BaseModel
         return $query->where('etat', self::ETAT_PUBLIE);
     }
 
-    public function scopeRecettes(Builder $query)
-    {
-        return $query->where('type', self::TYPE_RECETTE);
-    }
+
     
     /*
      * Accessors & Mutators
@@ -178,22 +175,15 @@ class Article extends BaseModel
         return empty( $this->attributes['nom'] ) ? $this->titre : $this->attributes['nom'];
     }
 
-    public function getIsDeletableAttribute()
-    {
-        return $this->attributes['nom'] === null;
-    }
-
-    public function getCustomFieldsActiveAttribute()
-    {
-        $customFieldsActive = [];
-        foreach( config('ipsum.article.custom_fields') as $field ) {
-            if( isset( $field['conditions'] ) ) {
-                if( array_key_exists( 'article_types', $field['conditions'] ) && in_array( $this->type, $field['conditions']['article_types'] )
-                    || array_key_exists( 'article_noms', $field['conditions'] ) && in_array( $this->nom, $field['conditions']['article_noms'] ) ) {
-                    $customFieldsActive[] = $field;
-                }
+    public function getConfigAttribute(): array {
+        $config = [];
+        foreach( config('ipsum.article.groupes') as $groupe ) {
+            if( array_key_exists( 'article_types', $groupe['conditions'] ) && in_array( $this->type, $groupe['conditions']['article_types'] )
+                || array_key_exists( 'article_noms', $groupe['conditions'] ) && in_array( $this->nom, $groupe['conditions']['article_noms'] ) ) {
+                $config = $groupe;
+                break;
             }
         }
-        return $customFieldsActive;
+        return $config + config('ipsum.article.groupes.default');
     }
 }
