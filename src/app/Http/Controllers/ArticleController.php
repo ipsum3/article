@@ -71,7 +71,7 @@ class ArticleController extends AdminController
 
     public function destroy(Article $article)
     {
-        if (!$article->is_deletable) {
+        if ($article->config['is_guarded']) {
             return abort(403);
         }
 

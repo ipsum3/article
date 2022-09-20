@@ -26,6 +26,7 @@ use Ipsum\Core\Concerns\Slug;
  * @property-read int|null $articles_count
  * @property-read \Illuminate\Database\Eloquent\Collection|Categorie[] $children
  * @property-read int|null $children_count
+ * @property-read array $config
  * @property-read mixed $is_root
  * @property-read mixed $tag_meta_description
  * @property-read mixed $tag_title

@@ -31,9 +31,8 @@ use Ipsum\Media\Concerns\Mediable;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Ipsum\Article\app\Models\Categorie|null $categorie
- * @property-read mixed $custom_fields_active
+ * @property-read array $config
  * @property-read mixed $etat_to_string
- * @property-read mixed $is_deletable
  * @property-read mixed $is_page
  * @property-read mixed $is_post
  * @property-read mixed $is_publie
@@ -50,7 +49,6 @@ use Ipsum\Media\Concerns\Mediable;
  * @method static Builder|Article posts()
  * @method static Builder|Article publie()
  * @method static Builder|Article query()
- * @method static Builder|Article recettes()
  * @mixin \Eloquent
  */
 class Article extends BaseModel
