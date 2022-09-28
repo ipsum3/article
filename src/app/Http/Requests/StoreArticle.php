@@ -30,10 +30,15 @@ class StoreArticle extends FormRequest
 
         $rules = [];
 
-        if (config('ipsum.article.custom_fields')) {
-            foreach (config('ipsum.article.custom_fields') as $field) {
-                $rules['custom_fields.'.$field['name']] = $field['rules'];
-            }
+        if( !request()->article ) {
+            $article = new Article;
+            $article->type = request()->type;
+        } else {
+            $article = request()->article;
+        }
+
+        foreach ($article->config['custom_fields'] as $field) {
+            $rules['custom_fields.'.$field['name']] = $field['rules'];
         }
 
         return [
