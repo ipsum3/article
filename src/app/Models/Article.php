@@ -10,6 +10,7 @@ use Ipsum\Admin\Concerns\Htmlable;
 use Ipsum\Article\database\factories\ArticleFactory;
 use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Core\Concerns\Slug;
+use Ipsum\Core\Concerns\Translatable;
 use Ipsum\Media\Concerns\Mediable;
 
 /**
@@ -42,6 +43,8 @@ use Ipsum\Media\Concerns\Mediable;
  * @property-read \Ipsum\Media\app\Models\Media|null $illustration
  * @property-read \Illuminate\Database\Eloquent\Collection|\Ipsum\Media\app\Models\Media[] $medias
  * @property-read int|null $medias_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Ipsum\Core\app\Models\Translate[] $translates
+ * @property-read int|null $translates_count
  * @method static \Ipsum\Article\database\factories\ArticleFactory factory(...$parameters)
  * @method static Builder|Article newModelQuery()
  * @method static Builder|Article newQuery()
@@ -53,7 +56,7 @@ use Ipsum\Media\Concerns\Mediable;
  */
 class Article extends BaseModel
 {
-    use Slug, Mediable, Htmlable, HasFactory;
+    use Slug, Mediable, Htmlable, HasFactory, Translatable;
 
     protected $table = 'articles';
 
@@ -63,13 +66,16 @@ class Article extends BaseModel
 
     protected $htmlable = ['extrait', 'texte'];
 
+    protected $translatable_attributes = ['titre', 'extrait', 'texte', 'seo_title', 'seo_description'];
+
+    protected $translatable_attributes_adds = 'ipsum.article.translatable_attributes_adds';
+
     protected $casts = [
         'custom_fields' => AsCustomFieldsObject::class,
     ];
 
     const TYPE_PAGE = 'page';
     const TYPE_POST = 'post';
-    const TYPE_RECETTE = 'recette';
 
     const ETAT_PUBLIE = 'publie';
 

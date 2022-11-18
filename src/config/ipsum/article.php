@@ -2,6 +2,8 @@
 
 return [
 
+    'translatable_attributes_adds' => ['custom_fields.text', 'custom_fields.text2'],
+
     'types' => [
         'page',
         'post',
@@ -62,6 +64,32 @@ return [
         'post' => [
             'conditions' => [
                 'article_types' => ['post']
+            ],
+            'custom_fields' => [
+                [
+                    'name' => 'text',
+                    'label' => 'champXXXX',
+                    'description' => '',
+                    'defaut' => '',
+                    'type' => 'input',
+                    'rules' => 'nullable',
+                ],
+                [
+                    'name' => 'text2',
+                    'label' => 'champXXXX',
+                    'description' => '',
+                    'defaut' => '',
+                    'type' => 'input',
+                    'rules' => 'nullable',
+                ],
+                [
+                    'name' => 'text3',
+                    'label' => 'champXXXX',
+                    'description' => '',
+                    'defaut' => '',
+                    'type' => 'input',
+                    'rules' => 'nullable',
+                ]
             ],
             'categorie' => [
                 'type' => 'post'

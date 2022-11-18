@@ -55,16 +55,16 @@ class ArticleController extends AdminController
         return redirect()->route('admin.article.edit', [$type, $article->id]);
     }
 
-    public function edit($type, Article $article)
+    public function edit($type, Article $article, $locale = null)
     {
         $categories = $article->config['categorie'] ? Categorie::root( $article->config['categorie']['type'] )->with('children')->orderBy('order')->get() : null;
         return view('IpsumArticle::article.form', compact('article', 'type', 'categories'));
     }
 
-    public function update(StoreArticle $request, $type, Article $article)
+    public function update(StoreArticle $request, $type, Article $article, $locale = null)
     {
         $article->update($request->validated());
-
+//dd('stop');
         Alert::success("L'enregistrement a bien été modifié")->flash();
         return back();
     }

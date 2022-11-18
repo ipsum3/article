@@ -5,16 +5,24 @@
 
     <h1 class="main-title">Article</h1>
 
-    {{ Aire::open()->route($article->exists ? 'admin.article.update' : 'admin.article.store', $article->exists ? [$type, $article] : $type)->bind($article)->formRequest(\Ipsum\Article\app\Http\Requests\StoreArticle::class) }}
-    {{ Aire::hidden('type', $type) }}
-
-    <div class="box">
-        <div class="box-header">
-            <h2 class="box-title">{{ $article->exists ? 'Modification' : 'Ajout ' . $type }}</h2>
-            <div class="btn-toolbar">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i> Enregistrer</button>&nbsp;
-                <button class="btn btn-outline-secondary" type="reset" data-toggle="tooltip" title="Annuler les modifications en cours"><i class="fas fa-undo"></i></button>&nbsp;
-                @if ($article->exists)
+    {{ Aire::open()->route($article->exists ? 'admin.article.update' : 'admin.article.store', $article->exists ? [$type, $article, request()->route('locale')] : $type)->bind($article)->formRequest(\Ipsum\Article\app\Http\Requests\StoreArticle::class) }}
+        {{ Aire::hidden('type', $type) }}
+        <div class="box">
+            <div class="box-header">
+                <h2 class="box-title">{{ $article->exists ? 'Modification' : 'Ajout' }}</h2>
+                <div class="btn-toolbar">
+                    @if (count(config('ipsum.translate.locales')) > 1)
+                        <ul class="nav nav-tabs mr-5" role="tablist">
+                            @foreach(config('ipsum.translate.locales') as $locale)
+                                <li class="nav-item">
+                                    <a class="nav-link {{ (request()->route('locale') == $locale['nom'] or (request()->route('locale') === null and config('ipsum.translate.default_locale') == $locale['nom'])) ? 'active' : '' }}" href="{{ route('admin.article.edit', [$type, $article, $locale['nom']]) }}" aria-selected="true">{{ $locale['intitule'] }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i> Enregistrer</button>&nbsp;
+                    <button class="btn btn-outline-secondary" type="reset" data-toggle="tooltip" title="Annuler les modifications en cours"><i class="fas fa-undo"></i></button>&nbsp;
+                    @if ($article->exists)
                     <a class="btn btn-outline-secondary" href="{{ route('admin.article.create', $type) }}" data-toggle="tooltip" title="Ajouter">
                         <i class="fas fa-plus"></i>
                     </a>&nbsp;

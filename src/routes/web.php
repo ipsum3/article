@@ -62,14 +62,14 @@ Route::group(
             "as" => "admin.article.delete",
             "uses" => "ArticleController@destroy",
         ));
-        Route::put("{type}/{article}", array(
+        Route::put("{type}/{article}/{locale?}", array(
             "as" => "admin.article.update",
             "uses" => "ArticleController@update",
         ));
-        Route::get("{type}/{article}/edit", array(
+        Route::get("{type}/{article}/edit/{locale?}", array(
             "as" => "admin.article.edit",
             "uses" => "ArticleController@edit",
         ));
-
+        
     }
 );
