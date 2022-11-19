@@ -64,7 +64,7 @@ class ArticleController extends AdminController
     public function update(StoreArticle $request, $type, Article $article, $locale = null)
     {
         $article->update($request->validated());
-//dd('stop');
+
         Alert::success("L'enregistrement a bien été modifié")->flash();
         return back();
     }

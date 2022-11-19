@@ -11,7 +11,7 @@
             <div class="box-header">
                 <h2 class="box-title">{{ $article->exists ? 'Modification' : 'Ajout' }}</h2>
                 <div class="btn-toolbar">
-                    @if (count(config('ipsum.translate.locales')) > 1)
+                    @if ($article->exists and count(config('ipsum.translate.locales')) > 1)
                         <ul class="nav nav-tabs mr-5" role="tablist">
                             @foreach(config('ipsum.translate.locales') as $locale)
                                 <li class="nav-item">

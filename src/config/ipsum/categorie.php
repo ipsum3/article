@@ -19,4 +19,5 @@ return [
         ],*/
     ],
 
+    'translatable_attributes_adds' => [],
 ];

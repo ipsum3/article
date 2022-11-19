@@ -28,11 +28,11 @@ Route::group(
             "as" => "admin.articleCategorie.delete",
             "uses" => "CategorieController@destroy",
         ));
-        Route::put("categorie/{categorie}", array(
+        Route::put("categorie/{categorie}/{locale?}", array(
             "as" => "admin.articleCategorie.update",
             "uses" => "CategorieController@update",
         ));
-        Route::get("categorie/{categorie}/edit", array(
+        Route::get("categorie/{categorie}/edit/{locale?}", array(
             "as" => "admin.articleCategorie.edit",
             "uses" => "CategorieController@edit",
         ));

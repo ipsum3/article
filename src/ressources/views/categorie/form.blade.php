@@ -5,11 +5,20 @@
 
     <h1 class="main-title">Catégorie</h1>
 
-    {{ Aire::open()->route($categorie->exists ? 'admin.articleCategorie.update' : 'admin.articleCategorie.store', $categorie->exists ? $categorie : null)->bind($categorie)->formRequest(\Ipsum\Article\app\Http\Requests\StoreCategorie::class) }}
+    {{ Aire::open()->route($categorie->exists ? 'admin.articleCategorie.update' : 'admin.articleCategorie.store', $categorie->exists ? [$categorie, request()->route('locale')] : null)->bind($categorie)->formRequest(\Ipsum\Article\app\Http\Requests\StoreCategorie::class) }}
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">{{ $categorie->exists ? 'Modification' : 'Ajout catégorie ' . $type }}</h3>
                 <div class="btn-toolbar">
+                    @if ($categorie->exists and count(config('ipsum.translate.locales')) > 1)
+                        <ul class="nav nav-tabs mr-5" role="tablist">
+                            @foreach(config('ipsum.translate.locales') as $locale)
+                                <li class="nav-item">
+                                    <a class="nav-link {{ (request()->route('locale') == $locale['nom'] or (request()->route('locale') === null and config('ipsum.translate.default_locale') == $locale['nom'])) ? 'active' : '' }}" href="{{ route('admin.articleCategorie.edit', [$categorie, $locale['nom']]) }}" aria-selected="true">{{ $locale['intitule'] }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
                     <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i> Enregistrer</button>&nbsp;
                     <button class="btn btn-outline-secondary" type="reset" data-toggle="tooltip" title="Annuler les modifications en cours"><i class="fas fa-undo"></i></button>&nbsp;
                     @if ($categorie->exists)

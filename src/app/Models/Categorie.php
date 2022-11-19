@@ -9,6 +9,7 @@ use Ipsum\Article\Concerns\Sortable;
 use Ipsum\Article\database\factories\CategorieFactory;
 use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Core\Concerns\Slug;
+use Ipsum\Core\Concerns\Translatable;
 
 /**
  * Ipsum\Article\app\Models\Categorie
@@ -31,6 +32,8 @@ use Ipsum\Core\Concerns\Slug;
  * @property-read mixed $tag_meta_description
  * @property-read mixed $tag_title
  * @property-read Categorie|null $parent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Ipsum\Core\app\Models\Translate[] $translates
+ * @property-read int|null $translates_count
  * @method static \Ipsum\Article\database\factories\CategorieFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Categorie newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Categorie newQuery()
@@ -40,7 +43,7 @@ use Ipsum\Core\Concerns\Slug;
  */
 class Categorie extends BaseModel
 {
-    use Slug, Sortable, Htmlable, HasFactory;
+    use Slug, Sortable, Htmlable, HasFactory, Translatable;
 
     protected $table = 'article_categories';
 
@@ -49,6 +52,8 @@ class Categorie extends BaseModel
     protected $slugBase = 'nom';
 
     protected $htmlable = ['description'];
+
+    protected $translatable_attributes = ['nom', 'description'];
 
     public $timestamps = false;
 

@@ -37,13 +37,13 @@ class CategorieController extends AdminController
         return redirect()->route('admin.articleCategorie.edit', [$categorie->id]);
     }
 
-    public function edit(Categorie $categorie)
+    public function edit(Categorie $categorie, $locale = null)
     {
         $categories = Categorie::root($categorie->type)->where('id', '!=', $categorie->id)->get()->pluck('nom', 'id');
         return view('IpsumArticle::categorie.form', compact('categorie', 'categories'));
     }
 
-    public function update(StoreCategorie $request, Categorie $categorie)
+    public function update(StoreCategorie $request, Categorie $categorie, $locale = null)
     {
         $categorie->update($request->validated());
 
