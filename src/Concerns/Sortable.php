@@ -5,7 +5,7 @@ namespace Ipsum\Article\Concerns;
 trait Sortable
 {
 
-    protected static function bootOrder()
+    protected static function bootSortable()
     {
 
         self::saving(function(self $objet)
