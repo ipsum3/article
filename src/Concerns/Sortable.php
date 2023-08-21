@@ -35,11 +35,14 @@ trait Sortable
 
 
 
-    static public function updateOrder($parent_id = null, string $type, $exclude_id = null)
+    static public function updateOrder($parent_id = null, string $type = null, $exclude_id = null)
     {
-        $query = self::select(['id', 'order', 'parent_id'])->where('type', $type)/*->where('id', '!=', )*/;
+        $query = self::select(['id', 'order', 'parent_id'])/*->where('id', '!=', )*/;
         if ($parent_id !== null) {
             $query->where('parent_id', $parent_id);
+        }
+        if ($type !== null) {
+            $query->where('type', $type);
         }
         if ($exclude_id !== null) {
             $query->where('id', '!=', $exclude_id);
