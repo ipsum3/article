@@ -4,6 +4,7 @@ namespace Ipsum\Article\app\Models;
 
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Ipsum\Admin\app\Casts\AsCustomFieldsObject;
 use Ipsum\Admin\Concerns\Htmlable;
 use Ipsum\Article\Concerns\Sortable;
 use Ipsum\Article\database\factories\CategorieFactory;
@@ -47,7 +48,7 @@ class Categorie extends BaseModel
 
     protected $table = 'article_categories';
 
-    protected $fillable = ['parent_id', 'slug', 'nom', 'description', 'type', 'order', 'seo_title', 'seo_description'];
+    protected $fillable = ['parent_id', 'slug', 'nom', 'description', 'type', 'order', 'custom_fields', 'seo_title', 'seo_description'];
 
     protected $slugBase = 'nom';
 
@@ -56,6 +57,10 @@ class Categorie extends BaseModel
     protected $translatable_attributes = ['nom', 'description'];
 
     public $timestamps = false;
+
+    protected $casts = [
+        'custom_fields' => AsCustomFieldsObject::class,
+    ];
 
 
     protected static function newFactory()

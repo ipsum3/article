@@ -16,6 +16,16 @@ return [
                 'categorie_types' => [XXXXXX],
             ],
             'is_guarded' => true,
+            'custom_fields' => [
+                [
+                    'name' => 'url',
+                    'label' => 'champXXXX',
+                    'description' => '',
+                    'defaut' => '',
+                    'type' => 'url',
+                    'rules' => 'nullable|url',
+                ]
+            ],
         ],*/
     ],
 

@@ -38,9 +38,29 @@
                 {{ Aire::input('nom', 'Nom*') }}
                 {{ Aire::select(collect(['' => '---- Base -----'])->union($categories), 'parent_id', 'Catégorie parente') }}
                 {{ Aire::textArea('description', 'Description')->class('tinymce-simple') }}
-                <script src="{{ asset('ipsum/admin/dist/tinymce.js') }}"></script>
             </div>
         </div>
+        @if ( $categorie->config['custom_fields'] )
+            <div class="box">
+                <div class="box-header">
+                    <h2 class="box-title">
+                        Informations complémentaires
+                    </h2>
+                </div>
+                <div class="box-body">
+                    @foreach($categorie->config['custom_fields'] as $field)
+                        <x-admin::custom
+                                name="{{ 'custom_fields['.$field['name'].']' }}"
+                                label="{{ $field['label'] }}"
+                                description="{{ $field['description'] }}"
+                                value="{!! old('custom_fields.'.$field['name'], $categorie->custom_fields->{$field['name']}) !!}"
+                                type="{{ $field['type'] }}"
+                        />
+                    @endforeach
+                </div>
+            </div>
+        @endif
+        <script src="{{ asset('ipsum/admin/dist/tinymce.js') }}"></script>
         @if(auth()->user()->isSuperAdmin())
             <div class="box">
                 <div class="box-header">

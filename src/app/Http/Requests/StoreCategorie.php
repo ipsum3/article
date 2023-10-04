@@ -4,6 +4,7 @@ namespace Ipsum\Article\app\Http\Requests;
 
 
 use Ipsum\Admin\app\Http\Requests\FormRequest;
+use Ipsum\Article\app\Models\Categorie;
 
 class StoreCategorie extends FormRequest
 {
@@ -24,6 +25,17 @@ class StoreCategorie extends FormRequest
      */
     public function rules()
     {
+        $rules = [];
+
+        if( !request()->categorie ) {
+            $categorie = new Categorie;
+        } else {
+            $categorie = request()->categorie;
+        }
+
+        foreach ($categorie->config['custom_fields'] as $field) {
+            $rules['custom_fields.'.$field['name']] = $field['rules'];
+        }
         return [
             'parent_id' => 'nullable|exists:article_categories,id,parent_id,NULL',
             'nom' => 'required|max:255',
@@ -32,7 +44,7 @@ class StoreCategorie extends FormRequest
             'seo_title' => '',
             'seo_description' => '',
             'slug' => '',
-        ];
+        ] + $rules;
     }
 
 }
