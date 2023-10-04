@@ -32,9 +32,10 @@ class StoreCategorie extends FormRequest
         } else {
             $categorie = request()->categorie;
         }
-
-        foreach ($categorie->config['custom_fields'] as $field) {
-            $rules['custom_fields.'.$field['name']] = $field['rules'];
+        if(!empty($categorie->config['custom_fields'])) {
+            foreach ($categorie->config['custom_fields'] as $field) {
+                $rules['custom_fields.'.$field['name']] = $field['rules'];
+            }
         }
         return [
             'parent_id' => 'nullable|exists:article_categories,id,parent_id,NULL',

@@ -19,15 +19,37 @@ return [
             ],
             'custom_fields' => [],
             'is_guarded' => false,
-            /*'publication' => [
-
-            ],*/
+            'publication' => [
+                'hide_date' => false,
+                'hide_etat' => false,
+            ],
             'has_extrait' => true,
             'has_texte' => true,
         ],
-        /*'example' => [
+
+        'page' => [
             'conditions' => [
-                'article_types' => ['solution']
+                'article_types' => ['page']
+            ],
+            'is_guarded' => true
+        ],
+
+        'post' => [
+            'conditions' => [
+                'article_types' => ['post']
+            ],
+            'categorie' => [
+                'type' => 'post'
+            ]
+        ],
+
+        /* EXAMPLE DE CONFIG
+        // Nom du groupe (non visible)
+        'example' => [
+            // Conditions pour affecter ce groupe à un article (type/nom)
+            'conditions' => [
+                'article_types' => ['solution'],
+                'article_noms' => ['Accueil']
             ],
             'custom_fields' => [
                 [
@@ -40,33 +62,24 @@ return [
                 ]
             ],
             'categorie' => [
+                // Nom du type de catégorie à utiliser
                 'type' => 'XXXXXX'
             ],
             'medias' => [
                 ['groupe' => ''],
+                // Pour afficher plusieurs module de média
                 ['groupe' => 'XXXXXXXXX']
             ],
+            // Protège de la supression
             'is_guarded' => false,
+            // Gestion de l'affichage de la date et l'état dans publication
             'publication' => [
-
+                'hide_date' => true,
+                'hide_etat' => true,
             ],
             'hide_extrait' => true,
             'hide_texte' => true,
         ],*/
-        'page' => [
-            'conditions' => [
-                'article_types' => ['page']
-            ],
-            'is_guarded' => true
-        ],
-        'post' => [
-            'conditions' => [
-                'article_types' => ['post']
-            ],
-            'categorie' => [
-                'type' => 'post'
-            ]
-        ]
     ],
 
     'etats' => [

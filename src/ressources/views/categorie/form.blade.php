@@ -40,7 +40,7 @@
                 {{ Aire::textArea('description', 'Description')->class('tinymce-simple') }}
             </div>
         </div>
-        @if ( $categorie->config['custom_fields'] )
+        @if (!empty($categorie->config['custom_fields']))
             <div class="box">
                 <div class="box-header">
                     <h2 class="box-title">
