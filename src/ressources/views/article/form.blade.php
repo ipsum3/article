@@ -89,7 +89,7 @@
 
     <script src="{{ asset('ipsum/admin/dist/tinymce.js') }}"></script>
 
-    @if (!$article->config['publication']['hide_date'] || !$article->config['publication']['hide_etat'])
+    @if (!empty($article->config['publication']['has_date']) || !empty($article->config['publication']['has_etat']))
     <div class="box">
         <div class="box-header">
             <h2 class="box-title">
@@ -100,12 +100,12 @@
             </h2>
         </div>
         <div class="box-body row">
-            @if (!$article->config['publication']['hide_date'])
+            @if (!empty($article->config['publication']['has_date']))
             <div class="col">
                 {{ Aire::date('date', 'Date') }}
             </div>
             @endif
-            @if (!$article->config['publication']['hide_etat'])
+            @if (!empty($article->config['publication']['has_etat']))
             <div class="col">
                 {{ Aire::select(config('ipsum.article.etats'), 'etat', 'Etat') }}
             </div>
@@ -113,7 +113,7 @@
         </div>
     </div>
     @endif
-    @if ($article->config['publication']['hide_etat'])
+    @if (!empty($article->config['publication']['has_etat']))
         {{ Aire::hidden('etat', array_key_first(config('ipsum.article.etats'))) }}
     @endif
     @if( $article->config['medias'] )

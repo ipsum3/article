@@ -20,8 +20,8 @@ return [
             'custom_fields' => [],
             'is_guarded' => false,
             'publication' => [
-                'hide_date' => false,
-                'hide_etat' => false,
+                'has_date' => true,
+                'has_etat' => true,
             ],
             'has_extrait' => true,
             'has_texte' => true,
@@ -74,11 +74,11 @@ return [
             'is_guarded' => false,
             // Gestion de l'affichage de la date et l'état dans publication
             'publication' => [
-                'hide_date' => true,
-                'hide_etat' => true,
+                'has_date' => true,
+                'has_etat' => true,
             ],
-            'hide_extrait' => true,
-            'hide_texte' => true,
+            'has_extrait' => true,
+            'has_texte' => true,
         ],*/
     ],
 
