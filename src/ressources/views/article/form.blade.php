@@ -113,7 +113,7 @@
         </div>
     </div>
     @endif
-    @if (!empty($article->config['publication']['has_etat']))
+    @if (empty($article->config['publication']['has_etat']))
         {{ Aire::hidden('etat', array_key_first(config('ipsum.article.etats'))) }}
     @endif
     @if( $article->config['medias'] )
