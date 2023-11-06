@@ -46,6 +46,8 @@ class StoreArticle extends FormRequest
             'titre' => 'required|max:255',
             'extrait' => '',
             'texte' => '',
+            'custom_fields' => '',
+            'custom_blocs' => '',
             'seo_title' => '',
             'seo_description' => '',
             'slug' => '',

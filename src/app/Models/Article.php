@@ -6,6 +6,8 @@ namespace Ipsum\Article\app\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Ipsum\Admin\app\Casts\AsCustomFieldsObject;
+use Ipsum\Admin\app\Casts\CustomBlocs;
+use Ipsum\Admin\app\Casts\RenderCustomBlocs;
 use Ipsum\Admin\Concerns\Htmlable;
 use Ipsum\Article\database\factories\ArticleFactory;
 use Ipsum\Core\app\Models\BaseModel;
@@ -60,7 +62,7 @@ class Article extends BaseModel
 
     protected $table = 'articles';
 
-    protected $fillable = ['slug', 'type', 'etat', 'categorie_id', 'titre', 'extrait', 'texte', 'custom_fields', 'date', 'seo_title', 'seo_description'];
+    protected $fillable = ['slug', 'type', 'etat', 'categorie_id', 'titre', 'extrait', 'texte', 'custom_blocs', 'custom_fields', 'date', 'seo_title', 'seo_description'];
 
     protected $slugBase = 'titre';
 
@@ -72,6 +74,8 @@ class Article extends BaseModel
 
     protected $casts = [
         'custom_fields' => AsCustomFieldsObject::class,
+        'custom_blocs' => CustomBlocs::class,
+        'texte_with_blocs' => RenderCustomBlocs::class,
     ];
 
     const TYPE_PAGE = 'page';

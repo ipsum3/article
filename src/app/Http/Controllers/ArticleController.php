@@ -8,6 +8,7 @@ use Ipsum\Article\app\Http\Requests\StoreArticle;
 use Ipsum\Article\app\Models\Article;
 use Ipsum\Article\app\Models\Categorie;
 use Prologue\Alerts\Facades\Alert;
+use voku\helper\AntiXSS;
 
 class ArticleController extends AdminController
 {
@@ -63,7 +64,10 @@ class ArticleController extends AdminController
 
     public function update(StoreArticle $request, $type, Article $article, $locale = null)
     {
-        $article->update($request->validated());
+        $datas = $request->validated();
+        $datas = $this->cleanArray($datas);
+
+        $article->update($datas);
 
         Alert::success("L'enregistrement a bien été modifié")->flash();
         return back();
@@ -81,5 +85,24 @@ class ArticleController extends AdminController
         Alert::warning("L'enregistrement a bien été supprimé")->flash();
         return redirect()->route('admin.article.index', $type);
 
+    }
+
+    protected function cleanArray($fields)
+    {
+        foreach ($fields as $name => $value) {
+            if(is_array($value)){
+                $value = $this->cleanArray($value);
+            }
+            $fields[$name] = is_string($value) ? $this->cleanValue($value) : $value;
+        }
+
+        return $fields;
+    }
+
+    protected function cleanValue($data)
+    {
+        $antiXss = new AntiXSS();
+        $antiXss->removeEvilHtmlTags(config('ipsum.admin.remove_evil_html_tags'));
+        return $antiXss->xss_clean($data);
     }
 }

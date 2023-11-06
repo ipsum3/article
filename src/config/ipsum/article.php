@@ -61,6 +61,135 @@ return [
                     'rules' => 'nullable|url',
                 ]
             ],
+            'custom_bloc' => [
+                [
+                    'name' => 'texte',
+                    'label' => 'Texte',
+                    'fields' => [
+                        [
+                            'name' => 'texte_custom',
+                            'label' => 'Texte 1',
+                            'description' => '',
+                            'defaut' => '',
+                            'type' => 'input',
+                            'rules' => 'nullable',
+                        ],
+                        [
+                            'name' => 'texte_custom_bis',
+                            'label' => 'Texte 2',
+                            'description' => '',
+                            'defaut' => '',
+                            'type' => 'input',
+                            'rules' => 'nullable',
+                        ],
+                        [
+                            'name' => 'relation',
+                            'label' => 'Relation',
+                            'description' => '',
+                            'defaut' => '',
+                            'model' => Ipsum\Article\app\Models\Categorie::class,
+                            'filtre' => [
+                                [
+                                    'method' => 'orderBy',
+                                    'args' => ['id', 'desc'],
+                                ]
+                            ],
+                            'type' => 'relation',
+                            'rules' => 'nullable',
+                        ],
+                        [
+                            'name' => 'repeater_field',
+                            'label' => 'Repeater Field',
+                            'description' => 'This is a repeater field for demonstration purposes.',
+                            'type' => 'repeater',
+                            'fields' => [
+                                [
+                                    'name' => 'sub_field_1',
+                                    'label' => 'Sub Field 1',
+                                    'description' => '',
+                                    'defaut' => '',
+                                    'type' => 'input',
+                                    'rules' => 'nullable',
+                                ],
+                                [
+                                    'name' => 'sub_field_2',
+                                    'label' => 'Sub Field 2',
+                                    'description' => '',
+                                    'defaut' => '',
+                                    'type' => 'input',
+                                    'rules' => 'nullable',
+                                ],
+                                // Ajoutez d'autres sous-champs au besoin
+                            ],
+                            'rules' => 'nullable',
+                        ],
+
+                    ],
+                ],
+                [
+                    'name' => 'repeater',
+                    'label' => 'Répétiteur',
+                    'fields' => [
+                        [
+                            'name' => 'repeater_field',
+                            'label' => 'Repeater Field',
+                            'description' => 'This is a repeater field for demonstration purposes.',
+                            'type' => 'repeater',
+                            'fields' => [
+                                [
+                                    'name' => 'sub_field_1',
+                                    'label' => 'Sub Field 1',
+                                    'description' => '',
+                                    'defaut' => '',
+                                    'type' => 'input',
+                                    'rules' => 'nullable',
+                                ],
+                                [
+                                    'name' => 'sub_field_2',
+                                    'label' => 'Sub Field 2',
+                                    'description' => '',
+                                    'defaut' => '',
+                                    'type' => 'input',
+                                    'rules' => 'nullable',
+                                ],
+                                [
+                                    'name' => 'sub_field_3',
+                                    'label' => 'Sub Field 2',
+                                    'description' => '',
+                                    'defaut' => '',
+                                    'type' => 'input',
+                                    'rules' => 'nullable',
+                                ],
+                                // Ajoutez d'autres sous-champs au besoin
+                            ],
+                            'rules' => 'nullable',
+                        ],
+
+                    ],
+                ],
+                [
+                    'name' => 'faq',
+                    'label' => 'FAQ',
+                    'fields' => [
+                        [
+                            'name' => 'questions',
+                            'label' => 'Question',
+                            'description' => '',
+                            'defaut' => '',
+                            'type' => 'input',
+                            'rules' => 'nullable',
+                        ],
+                        [
+                            'name' => 'reponses',
+                            'label' => 'Réponse',
+                            'description' => '',
+                            'defaut' => '',
+                            'type' => 'html-simple',
+                            'rules' => 'nullable',
+                        ],
+                    ],
+                ],
+            ],
             'categorie' => [
                 // Nom du type de catégorie à utiliser
                 'type' => 'XXXXXX'
