@@ -73,7 +73,7 @@
         </div>
     </div>
 
-    @if ( $article->config['custom_bloc'])
+    @if (!empty($article->config['custom_bloc']))
         <div id="blocs-container">
             <div id="blocs" class="sortable">
                 @if ($article->custom_blocs)
@@ -122,7 +122,7 @@
         </div>
     @endif
 
-    @if ( $article->config['custom_fields'] )
+    @if (!empty($article->config['custom_fields']))
         <div class="box">
             <div class="box-header">
                 <h2 class="box-title">

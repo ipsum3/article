@@ -18,6 +18,7 @@ return [
                 ['groupe' => '']
             ],
             'custom_fields' => [],
+            'custom_bloc' => [],
             'is_guarded' => false,
             'publication' => [
                 'has_date' => true,
