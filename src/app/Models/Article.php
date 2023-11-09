@@ -4,7 +4,11 @@ namespace Ipsum\Article\app\Models;
 
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
+use Illuminate\Database\Eloquent\Casts\AsCollection;
+use Illuminate\Database\Eloquent\Casts\AsStringable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Ipsum\Admin\app\Casts\AsCustomBlocs;
 use Ipsum\Admin\app\Casts\AsCustomFieldsObject;
 use Ipsum\Admin\app\Casts\CustomBlocs;
 use Ipsum\Admin\app\Casts\RenderCustomBlocs;
@@ -27,12 +31,14 @@ use Ipsum\Media\Concerns\Mediable;
  * @property string|null $nom
  * @property string|null $extrait
  * @property string|null $texte
- * @property mixed|null $custom_fields
+ * @property AsCustomFieldsObject|null $custom_fields
  * @property \Illuminate\Support\Carbon|null $date
  * @property string|null $seo_title
  * @property string|null $seo_description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property $custom_blocs
+ * @property $texte_with_blocs
  * @property-read \Ipsum\Article\app\Models\Categorie|null $categorie
  * @property-read array $config
  * @property-read mixed $etat_to_string
@@ -43,11 +49,11 @@ use Ipsum\Media\Concerns\Mediable;
  * @property-read mixed $tag_title
  * @property-read mixed $type_nom
  * @property-read \Ipsum\Media\app\Models\Media|null $illustration
- * @property-read \Illuminate\Database\Eloquent\Collection|\Ipsum\Media\app\Models\Media[] $medias
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Ipsum\Media\app\Models\Media> $medias
  * @property-read int|null $medias_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Ipsum\Core\app\Models\Translate[] $translates
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Ipsum\Core\app\Models\Translate> $translates
  * @property-read int|null $translates_count
- * @method static \Ipsum\Article\database\factories\ArticleFactory factory(...$parameters)
+ * @method static \Ipsum\Article\database\factories\ArticleFactory factory($count = null, $state = [])
  * @method static Builder|Article newModelQuery()
  * @method static Builder|Article newQuery()
  * @method static Builder|Article pages()
@@ -74,7 +80,7 @@ class Article extends BaseModel
 
     protected $casts = [
         'custom_fields' => AsCustomFieldsObject::class,
-        'custom_blocs' => CustomBlocs::class,
+        'custom_blocs' => AsCustomBlocs::class,
         'texte_with_blocs' => RenderCustomBlocs::class,
     ];
 

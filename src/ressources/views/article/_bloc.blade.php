@@ -1,4 +1,4 @@
-@foreach($article->config['custom_bloc'] as $bloc_config)
+@foreach($article->config['custom_blocs'] as $bloc_config)
     @if(isset($bloc_config['fields']) && isset($bloc->name) && $bloc_config['name'] == $bloc->name )
         <div class="bloc box sortable-item" id="bloc_{{ $key }}" data-sortable="{{ $key }}">
             <div class="box-header">

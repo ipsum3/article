@@ -73,19 +73,18 @@
         </div>
     </div>
 
-    @if (!empty($article->config['custom_bloc']))
+    @if (!empty($article->config['custom_blocs']))
         <div id="blocs-container">
             <div id="blocs" class="sortable">
-                @if ($article->custom_blocs)
-                    @foreach( $article->custom_blocs as $key => $bloc  )
-                        @dump($bloc->fields)
+                @if ($article->custom_blocs->count())
+                    @foreach($article->custom_blocs as $key => $bloc)
                         @include("IpsumArticle::article._bloc")
                     @endforeach
                 @endif
             </div>
         </div>
 
-        @foreach($article->config['custom_bloc'] as $bloc_config)
+        @foreach($article->config['custom_blocs'] as $bloc_config)
             @php
             $bloc = (object) $bloc_config;
             @endphp
@@ -105,7 +104,7 @@
                         <div class="col">
                             <select name="type_bloc" class="col form-control" id="type_bloc">
                                 <option value="">----- Type de bloc -----</option>
-                                @foreach($article->config['custom_bloc'] as $bloc)
+                                @foreach($article->config['custom_blocs'] as $bloc)
                                     <option value="{{ $bloc['name'] }}">{{ $bloc['label'] }}</option>
                                 @endforeach
                             </select>

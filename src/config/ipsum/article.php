@@ -18,7 +18,7 @@ return [
                 ['groupe' => '']
             ],
             'custom_fields' => [],
-            'custom_bloc' => [],
+            'custom_blocs' => [],
             'is_guarded' => false,
             'publication' => [
                 'has_date' => true,
@@ -44,9 +44,9 @@ return [
             ]
         ],
 
-        /* EXAMPLE DE CONFIG
+        // EXAMPLE DE CONFIG
         // Nom du groupe (non visible)
-        'example' => [
+        /*'example' => [
             // Conditions pour affecter ce groupe à un article (type/nom)
             'conditions' => [
                 'article_types' => ['solution'],
@@ -60,9 +60,24 @@ return [
                     'defaut' => '',
                     'type' => 'url',
                     'rules' => 'nullable|url',
-                ]
+                ],
+                [
+                    'name' => 'categorie',
+                    'label' => 'Catégorie',
+                    'description' => '',
+                    'defaut' => '',
+                    'model' => Ipsum\Article\app\Models\Categorie::class,
+                    'filtre' => [
+                        [
+                            'method' => 'orderBy',
+                            'args' => ['id', 'desc'],
+                        ]
+                    ],
+                    'type' => 'relation',
+                    'rules' => 'nullable',
+                ],
             ],
-            'custom_bloc' => [
+            'custom_blocs' => [
                 [
                     'name' => 'texte',
                     'label' => 'Texte',
@@ -80,51 +95,9 @@ return [
                             'label' => 'Texte 2',
                             'description' => '',
                             'defaut' => '',
-                            'type' => 'input',
+                            'type' => 'html',
                             'rules' => 'nullable',
                         ],
-                        [
-                            'name' => 'relation',
-                            'label' => 'Relation',
-                            'description' => '',
-                            'defaut' => '',
-                            'model' => Ipsum\Article\app\Models\Categorie::class,
-                            'filtre' => [
-                                [
-                                    'method' => 'orderBy',
-                                    'args' => ['id', 'desc'],
-                                ]
-                            ],
-                            'type' => 'relation',
-                            'rules' => 'nullable',
-                        ],
-                        [
-                            'name' => 'repeater_field',
-                            'label' => 'Repeater Field',
-                            'description' => 'This is a repeater field for demonstration purposes.',
-                            'type' => 'repeater',
-                            'fields' => [
-                                [
-                                    'name' => 'sub_field_1',
-                                    'label' => 'Sub Field 1',
-                                    'description' => '',
-                                    'defaut' => '',
-                                    'type' => 'input',
-                                    'rules' => 'nullable',
-                                ],
-                                [
-                                    'name' => 'sub_field_2',
-                                    'label' => 'Sub Field 2',
-                                    'description' => '',
-                                    'defaut' => '',
-                                    'type' => 'input',
-                                    'rules' => 'nullable',
-                                ],
-                                // Ajoutez d'autres sous-champs au besoin
-                            ],
-                            'rules' => 'nullable',
-                        ],
-
                     ],
                 ],
                 [
@@ -136,6 +109,7 @@ return [
                             'label' => 'Repeater Field',
                             'description' => 'This is a repeater field for demonstration purposes.',
                             'type' => 'repeater',
+                            'rules' => 'nullable',
                             'fields' => [
                                 [
                                     'name' => 'sub_field_1',
@@ -163,30 +137,6 @@ return [
                                 ],
                                 // Ajoutez d'autres sous-champs au besoin
                             ],
-                            'rules' => 'nullable',
-                        ],
-
-                    ],
-                ],
-                [
-                    'name' => 'faq',
-                    'label' => 'FAQ',
-                    'fields' => [
-                        [
-                            'name' => 'questions',
-                            'label' => 'Question',
-                            'description' => '',
-                            'defaut' => '',
-                            'type' => 'input',
-                            'rules' => 'nullable',
-                        ],
-                        [
-                            'name' => 'reponses',
-                            'label' => 'Réponse',
-                            'description' => '',
-                            'defaut' => '',
-                            'type' => 'html-simple',
-                            'rules' => 'nullable',
                         ],
                     ],
                 ],
@@ -197,7 +147,7 @@ return [
             ],
             'medias' => [
                 ['groupe' => ''],
-                // Pour afficher plusieurs module de média
+                // Pour afficher plusieurs modules de média
                 ['groupe' => 'XXXXXXXXX']
             ],
             // Protège de la supression

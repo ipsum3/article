@@ -24,18 +24,19 @@ use Ipsum\Core\Concerns\Translatable;
  * @property int|null $order
  * @property string|null $seo_title
  * @property string|null $seo_description
- * @property-read \Illuminate\Database\Eloquent\Collection|\Ipsum\Article\app\Models\Article[] $articles
+ * @property AsCustomFieldsObject $custom_fields
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Ipsum\Article\app\Models\Article> $articles
  * @property-read int|null $articles_count
- * @property-read \Illuminate\Database\Eloquent\Collection|Categorie[] $children
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Categorie> $children
  * @property-read int|null $children_count
  * @property-read array $config
  * @property-read mixed $is_root
  * @property-read mixed $tag_meta_description
  * @property-read mixed $tag_title
  * @property-read Categorie|null $parent
- * @property-read \Illuminate\Database\Eloquent\Collection|\Ipsum\Core\app\Models\Translate[] $translates
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Ipsum\Core\app\Models\Translate> $translates
  * @property-read int|null $translates_count
- * @method static \Ipsum\Article\database\factories\CategorieFactory factory(...$parameters)
+ * @method static \Ipsum\Article\database\factories\CategorieFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Categorie newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Categorie newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Categorie query()
