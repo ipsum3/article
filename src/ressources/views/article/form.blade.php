@@ -159,12 +159,16 @@
             <div class="box-body row">
                 @if (!empty($article->config['publication']['has_date']))
                     <div class="col">
-                        {{ Aire::date('date', 'Date') }}
+                        @if (!empty($article->config['publication']['required_date']))
+                            {{ Aire::date('date', 'Date*')->required() }}
+                        @else
+                            {{ Aire::date('date', 'Date') }}
+                        @endif
                     </div>
                 @endif
                 @if (!empty($article->config['publication']['has_etat']))
                     <div class="col">
-                        {{ Aire::select(config('ipsum.article.etats'), 'etat', 'Etat') }}
+                        {{ Aire::select(config('ipsum.article.etats'), 'etat', 'Etat*')->required() }}
                     </div>
                 @endif
             </div>

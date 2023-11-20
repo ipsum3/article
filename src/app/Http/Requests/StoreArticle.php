@@ -53,7 +53,7 @@ class StoreArticle extends FormRequest
             'slug' => '',
             'type' => 'required|in:'.implode(',', $types),
             'etat' => 'required|in:'.implode(',', $etats),
-            'date' => 'nullable|date'
+            'date' => 'date'.(!empty($article->config['publication']['has_etat']) ? '|required': '|nullable' )
         ] + $rules;
     }
 

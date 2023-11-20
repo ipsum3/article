@@ -23,6 +23,7 @@ return [
             'publication' => [
                 'has_date' => true,
                 'has_etat' => true,
+                'required_date' => false,
             ],
             'has_extrait' => true,
             'has_texte' => true,
