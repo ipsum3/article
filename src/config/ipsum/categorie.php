@@ -16,6 +16,9 @@ return [
                 'categorie_types' => [XXXXXX],
             ],
             'is_guarded' => true,
+            'medias' => [
+                ['groupe' => '']
+            ],
             'custom_fields' => [
                 [
                     'name' => 'url',

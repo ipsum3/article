@@ -58,6 +58,45 @@
                 </div>
             </div>
         @endif
+
+        @if( !empty($categorie->config['medias']) )
+            @foreach( $categorie->config['medias'] as $media )
+                <div class="box">
+                    <div class="box-header">
+                        <h2 class="box-title">Médias {{ $media['groupe'] }}</h2>
+                    </div>
+                    <div class="box-body">
+                        <div class="upload"
+                             data-uploadendpoint="{{ route('admin.media.store') }}"
+                             data-uploadmedias="{{ route('admin.media.publication', ['publication_type' => \Ipsum\Article\app\Models\Categorie::class, 'publication_id' => $categorie->exists ? $categorie->id : '', "groupe" => $media['groupe']]) }}"
+                             data-uploadrepertoire="article"
+                             data-uploadpublicationid="{{ $categorie->id }}"
+                             data-uploadpublicationtype="{{ \Ipsum\Article\app\Models\Categorie::class }}"
+                             data-uploadgroupe="{{ $media['groupe'] }}"
+                             data-uploadnote="Images et documents, poids maximum {{ config('ipsum.media.upload_max_filesize') }} Ko"
+                             data-uploadmaxfilesize="{{ config('ipsum.media.upload_max_filesize') }}"
+                             data-uploadmmaxnumberoffiles=""
+                             data-uploadminnumberoffiles=""
+                             data-uploadallowedfiletypes=""
+                             data-uploadcsrftoken="{{ csrf_token() }}">
+                            <div class="upload-DragDrop"></div>
+                            <div class="upload-ProgressBar"></div>
+                            <div class="upload-alerts mt-3"></div>
+                            <div class="mt-3">
+                                <h3>Médias associés :</h3>
+                                <div class="d-flex flex-row flex-wrap sortable upload-files"
+                                     data-sortableurl="{{ route('admin.media.changeOrder') }}"
+                                     data-sortablecsrftoken="{{ csrf_token() }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+            <link href="{{ asset('ipsum/admin/dist/uppy.css') }}" rel="stylesheet">
+            <script src="{{ asset('ipsum/admin/dist/uppy.js') }}"></script>
+        @endif
+
         <script src="{{ asset('ipsum/admin/dist/tinymce.js') }}"></script>
         @if(auth()->user()->isSuperAdmin())
             <div class="box">
