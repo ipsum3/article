@@ -69,7 +69,7 @@
                         <div class="upload"
                              data-uploadendpoint="{{ route('admin.media.store') }}"
                              data-uploadmedias="{{ route('admin.media.publication', ['publication_type' => \Ipsum\Article\app\Models\Categorie::class, 'publication_id' => $categorie->exists ? $categorie->id : '', "groupe" => $media['groupe']]) }}"
-                             data-uploadrepertoire="article"
+                             data-uploadrepertoire="categorie"
                              data-uploadpublicationid="{{ $categorie->id }}"
                              data-uploadpublicationtype="{{ \Ipsum\Article\app\Models\Categorie::class }}"
                              data-uploadgroupe="{{ $media['groupe'] }}"

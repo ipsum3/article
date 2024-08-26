@@ -11,6 +11,7 @@ use Ipsum\Article\database\factories\CategorieFactory;
 use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Core\Concerns\Slug;
 use Ipsum\Core\Concerns\Translatable;
+use Ipsum\Media\Concerns\Mediable;
 
 /**
  * Ipsum\Article\app\Models\Categorie
@@ -45,7 +46,7 @@ use Ipsum\Core\Concerns\Translatable;
  */
 class Categorie extends BaseModel
 {
-    use Slug, Sortable, Htmlable, HasFactory, Translatable;
+    use Slug, Mediable, Sortable, Htmlable, HasFactory, Translatable;
 
     protected $table = 'article_categories';
 
