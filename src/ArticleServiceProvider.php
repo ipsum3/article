@@ -62,7 +62,7 @@ class ArticleServiceProvider extends ServiceProvider
     public function publishFiles()
     {
         $this->publishes([
-            __DIR__.'/ressources/views' => resource_path('views/ipsum/article'),
+            __DIR__.'/ressources/views' => resource_path('views/vendor/IpsumArticle'),
         ], 'views');
     
         $this->publishes([
