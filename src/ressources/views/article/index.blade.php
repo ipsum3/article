@@ -35,51 +35,53 @@
                 <button type="submit" class="btn btn-outline-secondary mb-2">Rechercher</button>
             {{ Aire::close() }}
 
-            <table class="table table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th>@include('IpsumAdmin::partials.tri', ['label' => '#', 'champ' => 'id'])</th>
-                        <th>@include('IpsumAdmin::partials.tri', ['label' => 'État', 'champ' => 'etat'])</th>
-                        <th>@include('IpsumAdmin::partials.tri', ['label' => 'Date', 'champ' => 'created_at'])</th>
-                        <th>@include('IpsumAdmin::partials.tri', ['label' => 'Titre', 'champ' => 'titre'])</th>
-                        <th>Extrait</th>
-                        @if (config('ipsum.article.types.'.$type.'.has_categorie'))
-                        <th>Catégorie</th>
-                        @endif
-                        <th>Illustration</th>
-                        <th width="160px">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach ($articles as $article)
-                    <tr>
-                        <td>{{ $article->id }}</td>
-                        <td>{{ $article->etatToString }}</td>
-                        <td>{{ $article->created_at->format('d/m/Y') }}</td>
-                        <td>{{ $article->nom }}</td>
-                        <td>{{ Str::limit(strip_tags($article->extrait)) }}</td>
-                        @if (config('ipsum.article.types.'.$type.'.has_categorie'))
-                        <td>{{ $article->categorie ? $article->categorie->nom : '' }}</td>
-                        @endif
-                        <td>
-                            @if ($article->illustration)
-                            <img src="{{ Croppa::url($article->illustration->cropPath, 130, 130) }}" alt="{{ $article->illustration->tagAlt }}" />
+            <div class="table-wrapper">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>@include('IpsumAdmin::partials.tri', ['label' => '#', 'champ' => 'id'])</th>
+                            <th>@include('IpsumAdmin::partials.tri', ['label' => 'État', 'champ' => 'etat'])</th>
+                            <th>@include('IpsumAdmin::partials.tri', ['label' => 'Date', 'champ' => 'created_at'])</th>
+                            <th>@include('IpsumAdmin::partials.tri', ['label' => 'Titre', 'champ' => 'titre'])</th>
+                            <th>Extrait</th>
+                            @if (config('ipsum.article.types.'.$type.'.has_categorie'))
+                            <th>Catégorie</th>
                             @endif
-                        </td>
-                        <td class="text-right">
-                            <form action="{{ route('admin.article.destroy', $article) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <a class="btn btn-primary" href="{{ route('admin.article.edit', [$type, $article]) }}"><i class="fa fa-edit"></i> Modifier</a>
-                                @if( !$article->config['is_guarded'] )
-                                    <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash-alt"></i></button>
+                            <th>Illustration</th>
+                            <th width="160px">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($articles as $article)
+                        <tr>
+                            <td>{{ $article->id }}</td>
+                            <td>{{ $article->etatToString }}</td>
+                            <td>{{ $article->created_at->format('d/m/Y') }}</td>
+                            <td>{{ $article->nom }}</td>
+                            <td>{{ Str::limit(strip_tags($article->extrait)) }}</td>
+                            @if (config('ipsum.article.types.'.$type.'.has_categorie'))
+                            <td>{{ $article->categorie ? $article->categorie->nom : '' }}</td>
+                            @endif
+                            <td>
+                                @if ($article->illustration)
+                                <img src="{{ Croppa::url($article->illustration->cropPath, 130, 130) }}" alt="{{ $article->illustration->tagAlt }}" />
                                 @endif
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+                            </td>
+                            <td class="text-right">
+                                <form action="{{ route('admin.article.destroy', $article) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a class="btn btn-primary" href="{{ route('admin.article.edit', [$type, $article]) }}"><i class="fa fa-edit"></i> Modifier</a>
+                                    @if( !$article->config['is_guarded'] )
+                                        <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash-alt"></i></button>
+                                    @endif
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
 
             {!! $articles->appends(request()->all())->links() !!}
 
