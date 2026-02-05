@@ -36,7 +36,9 @@
             <div class="box-body">
                 {{ Aire::hidden('type', $categorie->exists ? $categorie->type : $type) }}
                 {{ Aire::input('nom', 'Nom*') }}
-                {{ Aire::select(collect(['' => '---- Base -----'])->union($categories), 'parent_id', 'Catégorie parente') }}
+                @if (!isset($categorie->config['is_root']))
+                    {{ Aire::select(collect(['' => '---- Base -----'])->union($categories), 'parent_id', 'Catégorie parente') }}
+                @endif
                 {{ Aire::textArea('description', 'Description')->class('tinymce-simple') }}
             </div>
         </div>

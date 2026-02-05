@@ -153,6 +153,8 @@ return [
             ],
             // Protège de la supression
             'is_guarded' => false,
+            // Pas de sous-catégorie
+            'is_root' => true,
             // Gestion de l'affichage de la date et l'état dans publication
             'publication' => [
                 'has_date' => true,
