@@ -43,7 +43,9 @@
                             <th>@include('IpsumAdmin::partials.tri', ['label' => 'État', 'champ' => 'etat'])</th>
                             <th>@include('IpsumAdmin::partials.tri', ['label' => 'Date', 'champ' => 'created_at'])</th>
                             <th>@include('IpsumAdmin::partials.tri', ['label' => 'Titre', 'champ' => 'titre'])</th>
+                            @if ( $articles->first()?->config['has_extrait'] )
                             <th>Extrait</th>
+                            @endif
                             @if (config('ipsum.article.types.'.$type.'.has_categorie'))
                             <th>Catégorie</th>
                             @endif
@@ -58,7 +60,9 @@
                             <td>{{ $article->etatToString }}</td>
                             <td>{{ $article->created_at->format('d/m/Y') }}</td>
                             <td>{{ $article->nom }}</td>
+                            @if ( $articles->first()?->config['has_extrait'] )
                             <td>{{ Str::limit(strip_tags($article->extrait)) }}</td>
+                            @endif
                             @if (config('ipsum.article.types.'.$type.'.has_categorie'))
                             <td>{{ $article->categorie ? $article->categorie->nom : '' }}</td>
                             @endif
