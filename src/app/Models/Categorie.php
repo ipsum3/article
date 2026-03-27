@@ -130,7 +130,7 @@ class Categorie extends BaseModel
     
     public function getTagMetaDescriptionAttribute()
     {
-        return $this->attributes['seo_description'] == '' ? $this->description : $this->attributes['seo_description'];
+        return $this->attributes['seo_description'] == '' ? strip_tags($this->description) : $this->attributes['seo_description'];
     }
 
     public function getConfigAttribute(): array {

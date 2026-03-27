@@ -156,7 +156,7 @@ class Article extends BaseModel
     
     public function getTagMetaDescriptionAttribute()
     {
-        return $this->attributes['seo_description'] == '' ? $this->extrait : $this->attributes['seo_description'];
+        return $this->attributes['seo_description'] == '' ? strip_tags($this->extrait) : $this->attributes['seo_description'];
     }
     
     public function getTypeNomAttribute()
