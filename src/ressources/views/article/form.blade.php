@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="box-body">
-            {{ Aire::input('titre', 'Titre*') }}
+            {{ Aire::input('titre', 'Titre*')->required() }}
 
             @if ($article->config['categorie'])
                 <div class="form-group">
