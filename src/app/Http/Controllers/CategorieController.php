@@ -59,7 +59,7 @@ class CategorieController extends AdminController
        }
 
         if ($categorie->children()->count()) {
-            Alert::warning('error', "Impossible de supprimer l'enregistrement, cette catégorie comporte des enfants.")->flash();
+            Alert::warning("Impossible de supprimer l'enregistrement, cette catégorie comporte des enfants.")->flash();
             return back();
         }
 

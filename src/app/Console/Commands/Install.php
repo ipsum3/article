@@ -13,8 +13,8 @@ class Install extends Command
      * @var string
      */
     protected $signature = 'ipsum:article:install
-                                {--timeout=300} : How many seconds to allow each process to run.
-                                {--debug} : Show process output or not. Useful for debugging.';
+                                {--timeout=300 : How many seconds to allow each process to run.}
+                                {--debug : Show process output or not. Useful for debugging.}';
 
     /**
      * The console command description.

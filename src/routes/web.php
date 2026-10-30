@@ -1,75 +1,43 @@
 <?php
 
-Route::group(
-    [
-        'middleware' => ['web'],
-        'prefix' => config('ipsum.admin.route_prefix').'/article',
-        'namespace' => '\Ipsum\Article\app\Http\Controllers'
-    ],
-    function() {
+use Illuminate\Support\Facades\Route;
+use Ipsum\Article\app\Http\Controllers\ArticleController;
+use Ipsum\Article\app\Http\Controllers\CategorieController;
 
-        Route::get("categorie", array(
-            "as" => "admin.articleCategorie.index",
-            "uses" => "CategorieController@index",
-        ));
-        Route::post("categorie", array(
-            "as" => "admin.articleCategorie.store",
-            "uses" => "CategorieController@store",
-        ));
-        Route::get("categorie/{type}/create", array(
-            "as" => "admin.articleCategorie.create",
-            "uses" => "CategorieController@create",
-        ));
-        Route::delete("categorie/{categorie}", array(
-            "as" => "admin.articleCategorie.destroy",
-            "uses" => "CategorieController@destroy",
-        ));
-        Route::get("categorie/{categorie}/delete", array(
-            "as" => "admin.articleCategorie.delete",
-            "uses" => "CategorieController@destroy",
-        ));
-        Route::put("categorie/{categorie}/{locale?}", array(
-            "as" => "admin.articleCategorie.update",
-            "uses" => "CategorieController@update",
-        ));
-        Route::get("categorie/{categorie}/edit/{locale?}", array(
-            "as" => "admin.articleCategorie.edit",
-            "uses" => "CategorieController@edit",
-        ));
-        Route::get('categorie/{categorie}/changeOrder/{direction}', array(
-            'as'     => 'admin.articleCategorie.changeOrder',
-            'uses'   => 'CategorieController@changeOrder'
-        ));
+Route::middleware(['web'])
+    ->prefix(config('ipsum.admin.route_prefix').'/article')
+    ->group(function () {
 
+        Route::get('categorie', [CategorieController::class, 'index'])
+            ->name('admin.articleCategorie.index');
+        Route::post('categorie', [CategorieController::class, 'store'])
+            ->name('admin.articleCategorie.store');
+        Route::get('categorie/{type}/create', [CategorieController::class, 'create'])
+            ->name('admin.articleCategorie.create');
+        Route::delete('categorie/{categorie}', [CategorieController::class, 'destroy'])
+            ->name('admin.articleCategorie.destroy');
+        Route::get('categorie/{categorie}/delete', [CategorieController::class, 'destroy'])
+            ->name('admin.articleCategorie.delete');
+        Route::put('categorie/{categorie}/{locale?}', [CategorieController::class, 'update'])
+            ->name('admin.articleCategorie.update');
+        Route::get('categorie/{categorie}/edit/{locale?}', [CategorieController::class, 'edit'])
+            ->name('admin.articleCategorie.edit');
+        Route::get('categorie/{categorie}/changeOrder/{direction}', [CategorieController::class, 'changeOrder'])
+            ->name('admin.articleCategorie.changeOrder');
 
-        Route::get("{type}", array(
-            "as" => "admin.article.index",
-            "uses" => "ArticleController@index",
-        ));
-        Route::post("{type}", array(
-            "as" => "admin.article.store",
-            "uses" => "ArticleController@store",
-        ));
-        Route::get("{type}/create", array(
-            "as" => "admin.article.create",
-            "uses" => "ArticleController@create",
-        ));
-        Route::delete("{article}", array(
-            "as" => "admin.article.destroy",
-            "uses" => "ArticleController@destroy",
-        ));
-        Route::get("{article}/delete", array(
-            "as" => "admin.article.delete",
-            "uses" => "ArticleController@destroy",
-        ));
-        Route::put("{type}/{article}/{locale?}", array(
-            "as" => "admin.article.update",
-            "uses" => "ArticleController@update",
-        ));
-        Route::get("{type}/{article}/edit/{locale?}", array(
-            "as" => "admin.article.edit",
-            "uses" => "ArticleController@edit",
-        ));
-        
-    }
-);
+        Route::get('{type}', [ArticleController::class, 'index'])
+            ->name('admin.article.index');
+        Route::post('{type}', [ArticleController::class, 'store'])
+            ->name('admin.article.store');
+        Route::get('{type}/create', [ArticleController::class, 'create'])
+            ->name('admin.article.create');
+        Route::delete('{article}', [ArticleController::class, 'destroy'])
+            ->name('admin.article.destroy');
+        Route::get('{article}/delete', [ArticleController::class, 'destroy'])
+            ->name('admin.article.delete');
+        Route::put('{type}/{article}/{locale?}', [ArticleController::class, 'update'])
+            ->name('admin.article.update');
+        Route::get('{type}/{article}/edit/{locale?}', [ArticleController::class, 'edit'])
+            ->name('admin.article.edit');
+
+    });

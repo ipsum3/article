@@ -82,17 +82,13 @@ class Article extends BaseModel
         'custom_fields' => AsCustomFieldsObject::class,
         'custom_blocs' => AsCustomBlocs::class,
         'texte_with_blocs' => RenderCustomBlocs::class,
+        'date' => 'datetime',
     ];
 
     const TYPE_PAGE = 'page';
     const TYPE_POST = 'post';
 
     const ETAT_PUBLIE = 'publie';
-
-    protected $dates = [
-        'date',
-    ];
-
 
     protected static function newFactory()
     {

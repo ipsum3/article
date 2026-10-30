@@ -13,13 +13,6 @@ class ArticleServiceProvider extends ServiceProvider
         \Ipsum\Article\app\Console\Commands\Install::class,
     ];
 
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
     protected $policies = [
         Article::class => ArticlePolicy::class,
     ];
@@ -66,7 +59,7 @@ class ArticleServiceProvider extends ServiceProvider
         ], 'views');
     
         $this->publishes([
-            __DIR__.'/database/seeds/' => database_path('seederss'),
+            __DIR__.'/database/seeds/' => database_path('seeders'),
         ], 'install');
     }
 

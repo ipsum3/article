@@ -1,6 +1,8 @@
 {
     "name": "ipsum3/article",
+    "description": "Article and category management package for Ipsum applications built with Laravel.",
     "license": "MIT",
+    "type": "library",
     "authors": [
         {
             "name": "B1nj",
@@ -9,7 +11,10 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "^8.0.2"
+        "php": "^8.5",
+        "laravel/framework": "^13.0",
+        "prologue/alerts": "^1.4.0",
+        "voku/anti-xss": "^4.1.45"
     },
     "autoload": {
         "psr-4": {
